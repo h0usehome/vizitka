@@ -1,19 +1,34 @@
 /* ===== Цвета и размеры: меняйте здесь ===== */
+/* ===== Цвета и размеры =====
+   Палитра выбирается атрибутом у <html data-palette="...">:
+   indigo (по умолчанию), forest, violet, ochre. Свои цвета: поменяйте значения ниже. */
+:root,:root[data-palette="indigo"]{
+  --bg:#F5F6FA; --bg-alt:#E9ECF4; --card:#FFFFFF; --line:#D5DAE6;
+  --ink:#0E1220; --muted:#4A5163;
+  --accent:#2D4BFF; --accent-dark:#1E36D1; --accent-soft:#AEBBFF;
+  --dev:#2338C9; --dev-bg:#E3E8FF; --seo:#0B7A4F; --seo-bg:#D9F2E6; --both:#5B2CB3; --both-bg:#EBE1FB;
+  --todo:#FFF1B8;
+}
+:root[data-palette="forest"]{
+  --bg:#F3F5F0; --bg-alt:#E5EADF; --line:#D2D9C9; --ink:#14201A; --muted:#4A5750;
+  --accent:#1B7A4B; --accent-dark:#12603A; --accent-soft:#9FE0BC;
+  --dev:#1B5FA8; --dev-bg:#DDE9F6; --seo:#1B7A4B; --seo-bg:#D9F2E6; --both:#8A5A12; --both-bg:#F3E8D2;
+}
+:root[data-palette="violet"]{
+  --bg:#F7F5FB; --bg-alt:#ECE8F5; --line:#DCD6EB; --ink:#17112B; --muted:#51485F;
+  --accent:#6D3AF0; --accent-dark:#5521CF; --accent-soft:#C9B5FF;
+  --dev:#5521CF; --dev-bg:#ECE5FD; --seo:#0B7A4F; --seo-bg:#D9F2E6; --both:#B3261E; --both-bg:#FBE3E0;
+}
+:root[data-palette="ochre"]{
+  --bg:#F6F4EE; --bg-alt:#EDE9DF; --line:#DAD5C8; --ink:#15171C; --muted:#4B515C;
+  --accent:#C8400F; --accent-dark:#A53409; --accent-soft:#FFB596;
+  --dev:#1F4FD8; --dev-bg:#E2E8FB; --seo:#0E7A52; --seo-bg:#DCF1E8; --both:#A53409; --both-bg:#F3E3DA;
+}
 :root{
-  --bg:#F6F4EE;          /* фон страницы */
-  --bg-alt:#EDE9DF;      /* фон чередующихся блоков */
-  --card:#FFFFFF;
-  --ink:#15171C;         /* основной текст */
-  --muted:#4B515C;       /* второстепенный текст */
-  --line:#DAD5C8;
-  --accent:#C8400F;      /* кнопки и акценты */
-  --accent-dark:#A53409;
-  --dev:#1F4FD8;         /* метка «Разработка» */
-  --seo:#0E7A52;         /* метка «Продвижение» */
-  --todo:#FFF1B8;        /* подсветка заглушек [в скобках] */
-  --radius:10px;
+  --card:#FFFFFF; --radius:10px;
   --gut:clamp(20px,5vw,48px);
   --font:'Manrope',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -42,14 +57,14 @@ section[id]{scroll-margin-top:76px}
 .btn--light{background:#fff;color:var(--ink);border-color:#fff}
 .btn--light:hover{background:var(--bg-alt);border-color:var(--bg-alt)}
 .eyebrow{margin-bottom:14px;font-size:15px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-.eyebrow--light{color:#FFB596}
-.tag{display:inline-block;margin-bottom:14px;padding:4px 12px;border-radius:999px;font-size:14px;font-weight:700;line-height:1.5;background:#E2E8FB;color:var(--dev)}
-.tag--seo{background:#DCF1E8;color:var(--seo)}
-.tag--both{background:#F3E3DA;color:var(--accent-dark)}
+.eyebrow--light{color:var(--accent-soft)}
+.tag{display:inline-block;margin-bottom:14px;padding:4px 12px;border-radius:999px;font-size:14px;font-weight:700;line-height:1.5;background:var(--dev-bg);color:var(--dev)}
+.tag--seo{background:var(--seo-bg);color:var(--seo)}
+.tag--both{background:var(--both-bg);color:var(--both)}
 .lead{font-size:clamp(18px,2vw,21px);color:var(--muted);max-width:60ch}
 
 /* ===== Шапка ===== */
-.header{position:sticky;top:0;z-index:50;background:rgba(246,244,238,.92);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
+.header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
 .header.is-stuck{border-color:var(--line)}
 .header__in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:68px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:19px}
@@ -102,7 +117,7 @@ section[id]{scroll-margin-top:76px}
 .facts span{color:var(--muted)}
 
 /* Заглушки под фото */
-.ph{display:flex;align-items:center;justify-content:center;padding:20px;text-align:center;background:#E4DECF;border:2px dashed #A79C84;border-radius:8px;color:#4B4331}
+.ph{display:flex;align-items:center;justify-content:center;padding:20px;text-align:center;background:color-mix(in srgb,var(--ink) 8%,var(--bg));border:2px dashed color-mix(in srgb,var(--ink) 35%,var(--bg));border-radius:8px;color:var(--ink)}
 .ph span{display:block;font-weight:700;max-width:30ch}
 .ph small{display:block;margin-top:8px;font-weight:500;font-size:14px;line-height:1.4}
 .ph--portrait{aspect-ratio:4/5}
@@ -114,8 +129,8 @@ section[id]{scroll-margin-top:76px}
 .compare__col--bad .compare__label{color:#B3261E}
 .compare__col--good .compare__label{color:var(--seo)}
 .mock{overflow:hidden;border-radius:var(--radius);border:1px solid var(--line);background:#fff;box-shadow:0 10px 30px rgba(21,23,28,.08)}
-.mock__bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:#E9E5DA;border-bottom:1px solid var(--line)}
-.mock__bar i{width:10px;height:10px;border-radius:50%;background:#B9B2A0}
+.mock__bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:color-mix(in srgb,var(--ink) 7%,var(--bg));border-bottom:1px solid var(--line)}
+.mock__bar i{width:10px;height:10px;border-radius:50%;background:color-mix(in srgb,var(--ink) 25%,var(--bg))}
 .mock__bar span{margin-left:10px;flex:1;min-width:0;padding:3px 12px;border-radius:999px;background:#fff;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mock__body{padding:18px;min-height:300px}
 .mock--bad .mock__body{background:linear-gradient(135deg,#ffe600 0,#ff6ec7 50%,#00e0ff 100%);font-family:'Comic Sans MS','Comic Sans',cursive}
@@ -126,14 +141,14 @@ section[id]{scroll-margin-top:76px}
 .bad-row b{flex:1;padding:14px 4px;background:#0a0;color:#fff;font-size:10px;text-align:center;border:3px ridge #f0f}
 .mock--good .mock__body{font-family:var(--font);background:#fff}
 .good-nav{display:flex;align-items:center;gap:10px;padding-bottom:14px;border-bottom:1px solid var(--line);font-size:13px}
-.good-nav span{width:36px;height:6px;border-radius:3px;background:#D8D3C6}
+.good-nav span{width:36px;height:6px;border-radius:3px;background:var(--line)}
 .good-nav b{margin-right:auto}
 .good-nav em{padding:6px 12px;border-radius:6px;background:var(--accent);color:#fff;font-style:normal;font-weight:700;font-size:12px}
 .good-title{margin:24px 0 8px;font-size:26px;font-weight:800;line-height:1.15;letter-spacing:-.02em}
 .good-text{margin-bottom:18px;color:var(--muted);font-size:15px;line-height:1.5}
 .good-btn{display:inline-block;padding:12px 20px;border-radius:8px;background:var(--accent);color:#fff;font-size:15px;font-weight:700}
 .good-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:26px}
-.good-row b{padding:12px 8px;border-radius:8px;background:var(--bg);font-size:12px;line-height:1.3;text-align:center}
+.good-row b{padding:12px 8px;border-radius:8px;background:var(--bg-alt);font-size:12px;line-height:1.3;text-align:center}
 .checks{margin-top:22px;display:grid;gap:12px}
 .checks li{position:relative;padding-left:34px}
 .checks li::before{position:absolute;left:0;top:2px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:14px;font-weight:800;line-height:1;color:#fff}
@@ -165,27 +180,75 @@ section[id]{scroll-margin-top:76px}
 .contact{padding:clamp(64px,9vw,112px) 0;background:var(--ink);color:#fff}
 .contact__in{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:48px;align-items:center}
 .contact h2{font-size:clamp(30px,4.6vw,52px);margin-bottom:18px}
-.contact .lead{color:#C9CDD6}
+.contact .lead{color:color-mix(in srgb,#fff 75%,var(--ink))}
 .contact__links{display:grid;gap:16px}
 .contact__links .btn{width:100%}
-.contact__a{display:flex;flex-direction:column;gap:2px;padding:18px 20px;border:1px solid #3A3F4B;border-radius:var(--radius);text-decoration:none;transition:border-color .2s}
+.contact__a{display:flex;flex-direction:column;gap:2px;padding:18px 20px;border:1px solid color-mix(in srgb,#fff 22%,var(--ink));border-radius:var(--radius);text-decoration:none;transition:border-color .2s}
 .contact__a:hover{border-color:#fff}
-.contact__a span{font-size:14px;color:#AEB3BE}
+.contact__a span{font-size:14px;color:color-mix(in srgb,#fff 62%,var(--ink))}
 .contact__a b{font-size:21px}
 .contact .todo{color:var(--ink)}
 
-.footer{padding:28px 0;background:var(--ink);border-top:1px solid #2A2E38;color:#AEB3BE;font-size:15px}
+.footer{padding:28px 0;background:var(--ink);border-top:1px solid color-mix(in srgb,#fff 12%,var(--ink));color:color-mix(in srgb,#fff 62%,var(--ink));font-size:15px}
 .footer__in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .footer .todo{color:var(--ink)}
 .footer a{text-decoration:none}
 .footer a:hover{color:#fff}
 
+
+/* ===== Анимации (все отключаются при «уменьшить движение») ===== */
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes sweep{from{background-size:0 100%}to{background-size:100% 100%}}
+@keyframes drift{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(-30px,24px,0)}}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 45%,transparent)}60%{box-shadow:0 0 0 12px transparent}}
+@keyframes open{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+/* Полоса прокрутки страницы */
+.progress{position:fixed;left:0;top:0;right:0;height:3px;z-index:60;background:var(--accent);transform:scaleX(0);transform-origin:0 50%;pointer-events:none}
+
+/* Появление первого экрана */
+.js .hero__text>*,.js .stats li{animation:rise .8s var(--ease) both}
+.js .hero__text>*:nth-child(1){animation-delay:.05s}
+.js .hero__text>*:nth-child(2){animation-delay:.15s}
+.js .hero__text>*:nth-child(3){animation-delay:.28s}
+.js .hero__text>*:nth-child(4){animation-delay:.4s}
+.js .stats li:nth-child(1){animation-delay:.45s}
+.js .stats li:nth-child(2){animation-delay:.55s}
+.js .stats li:nth-child(3){animation-delay:.65s}
+.hl{background:linear-gradient(transparent 62%,var(--accent-soft) 62%) no-repeat 0 0/100% 100%}
+.js .hl{background-size:0 100%;animation:sweep .9s .7s var(--ease) forwards}
+.hero{position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;right:-12%;top:-30%;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--accent) 16%,transparent),transparent 68%);animation:drift 14s ease-in-out infinite;pointer-events:none}
+.hero__in{position:relative}
+
+/* Подчёркивание ссылок меню */
+.nav a:not(.btn){position:relative}
+.nav a:not(.btn)::after{content:"";position:absolute;left:12px;right:12px;bottom:5px;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:0 50%;transition:transform .3s var(--ease)}
+.nav a:not(.btn):hover::after{transform:scaleX(1)}
+
+/* Кнопки */
+.btn{position:relative}
+@media (hover:hover){.btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px color-mix(in srgb,var(--accent) 30%,transparent)}.btn--ghost:hover,.btn--light:hover{box-shadow:none}}
+
+/* Макеты «плохой / хороший» */
+.bad-ticker{white-space:nowrap;overflow:hidden}
+.bad-ticker span{display:inline-block;padding-left:0;animation:ticker 9s linear infinite}
+.is-in .good-btn{animation:pulse 2.4s 1.2s ease-out 3}
+.checks li{transition:transform .3s var(--ease)}
+@media (hover:hover){.checks li:hover{transform:translateX(4px)}}
+
+/* Раскрытие вопросов */
+.qa[open] .qa__a{animation:open .35s var(--ease)}
+
 /* ===== Появление при прокрутке (только если включён JS) ===== */
-.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease var(--d,0ms),transform .6s var(--ease) var(--d,0ms)}
 .js .reveal.is-in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  *{transition:none!important;animation:none!important}
+  *,*::before{transition:none!important;animation:none!important}
+  .progress{display:none}
+  .js .hl{background-size:100% 100%}
   .js .reveal{opacity:1;transform:none}
 }
 

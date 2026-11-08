@@ -19,6 +19,21 @@
     window.addEventListener('resize', function () { if (window.innerWidth > 820) { setMenu(false); } });
   }
 
+  /* Палитра по ссылке для примерки: ?palette=forest | violet | ochre | indigo */
+  var m = /[?&]palette=(indigo|forest|violet|ochre)/.exec(location.search);
+  if (m) { root.setAttribute('data-palette', m[1]); }
+
+  /* Полоса прокрутки страницы */
+  var bar = doc.querySelector('.progress');
+  function progress() {
+    if (!bar) { return; }
+    var h = root.scrollHeight - window.innerHeight;
+    bar.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, window.scrollY / h) : 0) + ')';
+  }
+  window.addEventListener('scroll', progress, { passive: true });
+  window.addEventListener('resize', progress);
+  progress();
+
   /* Линия под шапкой после прокрутки */
   var header = doc.querySelector('.header');
   function onScroll() { if (header) { header.classList.toggle('is-stuck', window.scrollY > 8); } }
@@ -34,7 +49,12 @@
         if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
-    items.forEach(function (el) { el.classList.add('reveal'); io.observe(el); });
+    items.forEach(function (el) {
+      // Соседние блоки появляются по очереди
+      var i = Array.prototype.indexOf.call(el.parentNode.children, el);
+      el.style.setProperty('--d', Math.min(i, 5) * 70 + 'ms');
+      el.classList.add('reveal'); io.observe(el);
+    });
     // Страховка: через 2,5 секунды показываем всё, что не успело появиться
     setTimeout(function () { items.forEach(function (el) { el.classList.add('is-in'); }); }, 2500);
   }
