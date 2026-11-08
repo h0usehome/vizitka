@@ -1,14 +1,6 @@
-# Сайт-визитка
 
-Одностраничный сайт без сборки: `index.html`, `css/style.css`, `js/main.js`.
+(https://h0usehome.github.io/vizitka/)
 
-## Как выложить на GitHub Pages
-1. На github.com создайте репозиторий (например, `vizitka`), тип Public.
-2. Нажмите «uploading an existing file», перетащите **содержимое** папки (index.html, css, js), нажмите «Commit changes».
-3. Settings → Pages → Source: «Deploy from a branch», ветка `main`, папка `/ (root)` → Save.
-4. Через 1–2 минуты сайт откроется по адресу `https://ВАШ-ЛОГИН.github.io/vizitka/`.
-
-Свой домен: в Settings → Pages впишите его в поле Custom domain и добавьте у регистратора запись CNAME на `ВАШ-ЛОГИН.github.io`.
 
 ## Что заменить
 - Все жёлтые места `[в квадратных скобках]` это заглушки. Заполните и удалите у элемента `class="todo"`, подсветка пропадёт.
