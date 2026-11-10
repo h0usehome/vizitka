@@ -108,6 +108,25 @@
     });
   });
 
+  /* Объёмный наклон карточек услуг */
+  if (window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches && !reduce) {
+    doc.querySelectorAll('.card').forEach(function (c) {
+      // когда карточка уже появилась, снимаем «появление», чтобы оно не мешало наклону
+      c.addEventListener('transitionend', function (e) {
+        if (e.target === c && e.propertyName === 'transform' && c.classList.contains('is-in')) { c.classList.remove('reveal', 'is-in'); }
+      });
+      c.addEventListener('pointermove', function (e) {
+        var r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+        c.style.transform = 'perspective(900px) rotateX(' + (-y * 9).toFixed(2) + 'deg) rotateY(' + (x * 11).toFixed(2) + 'deg) translateY(-6px)';
+        c.style.setProperty('--gx', ((x + 0.5) * 100).toFixed(0) + '%');
+        c.style.setProperty('--gy', ((y + 0.5) * 100).toFixed(0) + '%');
+        c.style.setProperty('--sx', (-x * 22).toFixed(0) + 'px');
+        c.style.setProperty('--sy', (18 - y * 12).toFixed(0) + 'px');
+      });
+      c.addEventListener('pointerleave', function () { c.style.transform = ''; });
+    });
+  }
+
   /* Год в подвале */
   var y = doc.getElementById('year');
   if (y) { y.textContent = new Date().getFullYear(); }
