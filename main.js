@@ -108,16 +108,17 @@
     });
   });
 
-  /* Объёмный наклон карточек услуг */
+  /* Объёмный наклон: карточки услуг, «О нас», логотип */
   if (window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches && !reduce) {
-    doc.querySelectorAll('.card').forEach(function (c) {
+    doc.querySelectorAll('.card, .person, .logo').forEach(function (c) {
+      var k = c.classList.contains('logo') ? { p: 420, a: 18, b: 22, l: -2 } : { p: 900, a: 9, b: 11, l: -6 };
       // когда карточка уже появилась, снимаем «появление», чтобы оно не мешало наклону
       c.addEventListener('transitionend', function (e) {
         if (e.target === c && e.propertyName === 'transform' && c.classList.contains('is-in')) { c.classList.remove('reveal', 'is-in'); }
       });
       c.addEventListener('pointermove', function (e) {
         var r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
-        c.style.transform = 'perspective(900px) rotateX(' + (-y * 9).toFixed(2) + 'deg) rotateY(' + (x * 11).toFixed(2) + 'deg) translateY(-6px)';
+        c.style.transform = 'perspective(' + k.p + 'px) rotateX(' + (-y * k.a).toFixed(2) + 'deg) rotateY(' + (x * k.b).toFixed(2) + 'deg) translateY(' + k.l + 'px)';
         c.style.setProperty('--gx', ((x + 0.5) * 100).toFixed(0) + '%');
         c.style.setProperty('--gy', ((y + 0.5) * 100).toFixed(0) + '%');
         c.style.setProperty('--sx', (-x * 22).toFixed(0) + 'px');
