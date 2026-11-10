@@ -1,0 +1,20 @@
+# Необязательно: сам пересобирает блог при каждой загрузке статей на GitHub
+name: Сборка блога
+on:
+  push:
+    paths: ['posts/**', 'templates/**', 'build.py']
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.x' }
+      - run: python build.py
+      - run: |
+          git config user.name "blog-bot"
+          git config user.email "blog-bot@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || (git commit -m "Пересборка блога" && git push)
