@@ -128,6 +128,66 @@
     });
   }
 
+  /* Небоскрёбы по бокам и верхолазы: едут по фасадам вместе с прокруткой */
+  (function () {
+    var city = doc.createElement('div'); city.className = 'city'; city.setAttribute('aria-hidden', 'true');
+    // [x %, ширина %, верх %, глубина: 0 дальний, 1 ближний]
+    var LEFT = [[8,36,16,0],[44,38,30,0],[0,34,36,1],[30,30,52,1],[58,42,44,1]];
+    var RIGHT = [[52,40,20,0],[12,38,34,0],[66,34,40,1],[34,32,56,1],[0,30,46,1]];
+    function sky(arr, id) {
+      var s = '<svg class="city__svg" width="100%" height="100%"><defs>' +
+        '<pattern id="w' + id + '" width="12" height="16" patternUnits="userSpaceOnUse"><rect x="3" y="4" width="6" height="8" rx="1"/></pattern>' +
+        '<pattern id="l' + id + '" width="36" height="48" patternUnits="userSpaceOnUse"><rect x="3" y="4" width="6" height="8" rx="1"/><rect x="15" y="20" width="6" height="8" rx="1"/><rect x="27" y="36" width="6" height="8" rx="1"/></pattern></defs>';
+      arr.forEach(function (b) {
+        var g = (0.5 + b[3] * 0.5).toFixed(2), geo = 'x="' + b[0] + '%" y="' + b[2] + '%" width="' + b[1] + '%" height="' + (100 - b[2]) + '%"';
+        s += '<g opacity="' + g + '"><rect class="b" ' + geo + '/><rect class="win" ' + geo + ' style="fill:url(#w' + id + ')"/><rect class="lit" ' + geo + ' style="fill:url(#l' + id + ')"/>' +
+          '<line class="ant" x1="' + (b[0] + b[1] / 2) + '%" x2="' + (b[0] + b[1] / 2) + '%" y1="' + (b[2] - 4) + '%" y2="' + b[2] + '%"/></g>';
+      });
+      return s + '</svg>';
+    }
+    function man(color, prop) {
+      return '<div class="climber" style="--c:' + color + '"><span class="climber__rope"></span><div class="climber__body">' +
+        '<svg viewBox="0 0 44 74" width="44" height="74">' +
+        '<g class="leg-l"><rect class="suit" x="15" y="45" width="6" height="19" rx="3"/><rect class="shoe" x="14" y="62" width="8" height="5" rx="2"/></g>' +
+        '<g class="leg-r"><rect class="suit" x="23" y="45" width="6" height="19" rx="3"/><rect class="shoe" x="22" y="62" width="8" height="5" rx="2"/></g>' +
+        '<rect class="suit" x="14" y="28" width="16" height="20" rx="5"/><rect class="belt" x="14" y="41" width="16" height="3"/>' +
+        '<g class="arm-l"><line x1="15" y1="31" x2="19" y2="11"/><circle class="glove" cx="19" cy="10" r="3"/></g>' +
+        '<g class="arm-r"><line x1="29" y1="31" x2="25" y2="11"/><circle class="glove" cx="25" cy="10" r="3"/></g>' +
+        '<rect class="gear" x="19.5" y="0" width="5" height="9" rx="2"/>' +
+        '<circle class="suit" cx="22" cy="20" r="9"/><rect class="visor" x="16" y="17" width="12" height="6" rx="3"/><circle class="shine" cx="19" cy="19.5" r="1.2"/>' +
+        prop + '</svg></div></div>';
+    }
+    var tablet = '<rect class="prop" x="30" y="44" width="11" height="8" rx="1.5"/>';
+    var lens = '<circle class="prop" cx="36" cy="47" r="4"/><line class="propl" x1="39" y1="50" x2="42" y2="54"/>';
+    city.innerHTML = '<div class="city__side city__side--l">' + sky(LEFT, 'l') + man('var(--dev)', tablet) + '</div>' +
+                     '<div class="city__side city__side--r">' + sky(RIGHT, 'r') + man('var(--seo)', lens) + '</div>';
+    doc.body.appendChild(city);
+    if (reduce) { return; }
+
+    var mq = window.matchMedia('(min-width:1280px)');
+    var men = Array.prototype.map.call(city.querySelectorAll('.climber'), function (el) {
+      return { el: el, body: el.querySelector('.climber__body'), y: 84, v: 0 };
+    });
+    function tick(ts) {
+      if (mq.matches) {
+        var max = root.scrollHeight - window.innerHeight, p = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+        var lo = 84, hi = window.innerHeight - 96;
+        var target = [lo + (hi - lo) * p, lo + (hi - lo) * (0.14 + 0.86 * p)];
+        men.forEach(function (m, i) {
+          var ny = m.y + (target[i] - m.y) * (i ? 0.055 : 0.085), v = ny - m.y;
+          m.y = ny; m.v += (v - m.v) * 0.2;
+          m.el.classList.toggle('is-moving', Math.abs(m.v) > 0.25);
+          m.el.classList.toggle('is-up', m.v < 0);
+          var ang = Math.max(-16, Math.min(16, -m.v * 1.8)) + Math.sin(ts / 900 + i * 2) * 3;
+          m.el.style.transform = 'translate3d(0,' + ny.toFixed(1) + 'px,0)';
+          m.body.style.transform = 'rotate(' + ang.toFixed(2) + 'deg)';
+        });
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  })();
+
   /* Год в подвале */
   var y = doc.getElementById('year');
   if (y) { y.textContent = new Date().getFullYear(); }
