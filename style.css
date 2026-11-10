@@ -286,3 +286,50 @@ section[id]{scroll-margin-top:76px}
   .good-title{font-size:22px}
   .logo__text{font-size:17px}
 }
+
+/* ===== Апгрейд: кнопки ===== */
+.btn{overflow:hidden;isolation:isolate;transform:translate(var(--tx,0px),var(--ty,0px));transition:background .2s,border-color .2s,color .2s,box-shadow .25s,transform .18s var(--ease)}
+.btn::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.38) 50%,transparent 70%);transform:translateX(-130%)}
+@media (hover:hover){
+  .btn:hover{transform:translate(var(--tx,0px),calc(var(--ty,0px) - 2px))}
+  .btn:hover::after{transform:translateX(130%);transition:transform .75s var(--ease)}
+}
+.btn:active{transform:translate(var(--tx,0px),calc(var(--ty,0px) + 1px)) scale(.97)}
+
+/* ===== Апгрейд: курсор ===== */
+.cursor{position:fixed;left:0;top:0;z-index:90;width:34px;height:34px;margin:-17px 0 0 -17px;border:2px solid #fff;border-radius:50%;mix-blend-mode:difference;pointer-events:none;opacity:0;transition:width .25s var(--ease),height .25s var(--ease),margin .25s var(--ease),background .25s,opacity .3s}
+.cursor.is-on{opacity:1}
+.cursor.is-link{width:64px;height:64px;margin:-32px 0 0 -32px;background:rgba(255,255,255,.22)}
+.cursor.is-down{width:22px;height:22px;margin:-11px 0 0 -11px}
+.hero::after,.card::before,.post::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--accent) 14%,transparent),transparent 70%)}
+.card,.post{position:relative;overflow:hidden}
+@media (hover:hover){.hero:hover::after,.card:hover::before,.post:hover::before{opacity:1}}
+
+/* ===== Апгрейд: выбор ниши ===== */
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 36px}
+.tab{min-height:44px;padding:0 20px;border:2px solid var(--ink);border-radius:999px;background:transparent;color:var(--ink);font:700 16px/1 var(--font);cursor:pointer;transition:background .2s,color .2s,transform .2s var(--ease)}
+.tab:hover{transform:translateY(-2px)}
+.tab[aria-pressed="true"]{background:var(--ink);color:#fff}
+.tab.todo{border-style:dashed}
+.compare .mock__body{transition:opacity .18s}
+.compare.is-swap .mock__body{opacity:0}
+
+/* ===== Апгрейд: блог ===== */
+.posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.post{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);transition:transform .25s,box-shadow .25s}
+.post[hidden]{display:none}
+.post__a{display:flex;flex-direction:column;height:100%;padding:20px;text-decoration:none}
+.post .ph{margin-bottom:18px}
+.post h3{font-size:22px;margin-bottom:12px}
+.post__meta{margin-top:auto;padding-top:16px;font-size:15px;color:var(--muted)}
+.post__meta b{color:var(--ink)}
+.post--lead{grid-column:span 2}
+@media (hover:hover){.post:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(21,23,28,.08)}.post:hover h3{color:var(--accent)}}
+.more{margin-top:36px}
+.blog-head h1{font-size:clamp(32px,5vw,56px);margin-bottom:18px}
+.empty{margin-top:24px;color:var(--muted)}
+.nav a[aria-current]{color:var(--ink)}
+@media (max-width:1000px){.posts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.posts{grid-template-columns:minmax(0,1fr)}.post--lead{grid-column:auto}.tabs{gap:8px}}
+@media (pointer:coarse){.cursor{display:none}}
+@media (prefers-reduced-motion:reduce){.cursor{display:none}.btn{transform:none!important}}

@@ -33,6 +33,7 @@
       <a href="#about">О нас</a>
       <a href="#compare">Какой сайт нужен</a>
       <a href="#works">Примеры</a>
+      <a href="blog.html">Блог</a>
       <a href="#faq">Вопросы</a>
       <a class="btn btn--sm nav__cta" href="#contact">Обсудить проект</a>
     </nav>
@@ -162,8 +163,16 @@
     <header class="section__head">
       <p class="eyebrow">Какой сайт нужен</p>
       <h2>Два сайта одной компании. Угадайте, где заказывают</h2>
-      <p class="lead">Слева то, что мы чаще всего видим у клиентов. Справа то, что делаем мы.</p>
+      <p class="lead">Выберите нишу: слева то, что мы чаще всего видим у клиентов, справа то, что делаем мы.</p>
     </header>
+
+    <div class="tabs" role="group" aria-label="Выберите нишу бизнеса">
+      <button type="button" class="tab" aria-pressed="true" data-i="0">Ремонт</button>
+      <button type="button" class="tab" aria-pressed="false" data-i="1">Интернет-магазин</button>
+      <button type="button" class="tab" aria-pressed="false" data-i="2">Клиника</button>
+      <button type="button" class="tab" aria-pressed="false" data-i="3">Юридические услуги</button>
+      <button type="button" class="tab todo" aria-pressed="false" data-i="4">[Ещё ниша]</button>
+    </div>
 
     <div class="compare">
       <article class="compare__col compare__col--bad">
@@ -257,6 +266,29 @@
   </div>
 </section>
 
+<!-- ============ Блог ============ -->
+<section class="section section--alt" id="blog">
+  <div class="wrap">
+    <header class="section__head">
+      <p class="eyebrow">Блог</p>
+      <h2>Как устроены современные сайты</h2>
+      <p class="lead">Разбираем технологии создания и продвижения простым языком, без воды.</p>
+    </header>
+    <div class="posts">
+<article class="post" data-cat="dev" id="i1"><a class="post__a" href="#" aria-label="Скорость сайта и заявки: что такое Core Web Vitals (скоро)">
+<div class="ph ph--shot" role="img" aria-label="Место для обложки"><span>Обложка<small>16:10</small></span></div>
+<span class="tag tag--dev">Разработка</span><h3>Скорость сайта и заявки: что такое Core Web Vitals</h3><p class="post__meta"><span class="todo">[дата]</span> · <span class="todo">[N] мин</span> · <b>Скоро</b></p></a></article>
+<article class="post" data-cat="seo" id="i2"><a class="post__a" href="#" aria-label="ИИ в SEO: что отдать нейросети, а что нельзя (скоро)">
+<div class="ph ph--shot" role="img" aria-label="Место для обложки"><span>Обложка<small>16:10</small></span></div>
+<span class="tag tag--seo">Продвижение</span><h3>ИИ в SEO: что отдать нейросети, а что нельзя</h3><p class="post__meta"><span class="todo">[дата]</span> · <span class="todo">[N] мин</span> · <b>Скоро</b></p></a></article>
+<article class="post" data-cat="seo" id="i3"><a class="post__a" href="#" aria-label="Как попасть в ответы нейропоиска и AI-обзоров (скоро)">
+<div class="ph ph--shot" role="img" aria-label="Место для обложки"><span>Обложка<small>16:10</small></span></div>
+<span class="tag tag--seo">Продвижение</span><h3>Как попасть в ответы нейропоиска и AI-обзоров</h3><p class="post__meta"><span class="todo">[дата]</span> · <span class="todo">[N] мин</span> · <b>Скоро</b></p></a></article>
+    </div>
+    <p class="more"><a class="btn btn--ghost" href="blog.html">Все статьи</a></p>
+  </div>
+</section>
+
 <!-- ============ 4. Частые вопросы ============ -->
 <section class="section" id="faq">
   <div class="wrap faq">
@@ -319,6 +351,7 @@
 <footer class="footer">
   <div class="wrap footer__in">
     <p>© <span id="year">2026</span> <span class="todo">[Название студии]</span></p>
+    <a href="blog.html">Блог</a>
     <a href="#top">Наверх ↑</a>
   </div>
 </footer>
