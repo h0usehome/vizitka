@@ -108,34 +108,6 @@
     });
   });
 
-  /* Курсор: кольцо, магнитные кнопки, подсветка под указателем */
-  var fine = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
-  if (fine && !reduce) {
-    var ring = doc.createElement('div'); ring.className = 'cursor'; ring.setAttribute('aria-hidden', 'true'); doc.body.appendChild(ring);
-    var cx = 0, cy = 0, tx = 0, ty = 0, run = false;
-    function tick() {
-      cx += (tx - cx) * 0.2; cy += (ty - cy) * 0.2;
-      ring.style.transform = 'translate3d(' + cx + 'px,' + cy + 'px,0)';
-      if (Math.abs(tx - cx) + Math.abs(ty - cy) > 0.1) { requestAnimationFrame(tick); } else { run = false; }
-    }
-    doc.addEventListener('pointermove', function (e) {
-      tx = e.clientX; ty = e.clientY; ring.classList.add('is-on');
-      if (!run) { run = true; requestAnimationFrame(tick); }
-      ring.classList.toggle('is-link', !!e.target.closest('a, button, summary'));
-      var s = e.target.closest('.card, .post, .hero');
-      if (s) { var r = s.getBoundingClientRect(); s.style.setProperty('--mx', (e.clientX - r.left) + 'px'); s.style.setProperty('--my', (e.clientY - r.top) + 'px'); }
-      var b = e.target.closest('.btn');
-      if (b) { var q = b.getBoundingClientRect(); b.style.setProperty('--tx', ((e.clientX - q.left - q.width / 2) * 0.18).toFixed(1) + 'px'); b.style.setProperty('--ty', ((e.clientY - q.top - q.height / 2) * 0.3).toFixed(1) + 'px'); }
-    });
-    doc.addEventListener('pointerout', function (e) {
-      var b = e.target.closest && e.target.closest('.btn');
-      if (b && !b.contains(e.relatedTarget)) { b.style.setProperty('--tx', '0px'); b.style.setProperty('--ty', '0px'); }
-    });
-    doc.addEventListener('pointerdown', function () { ring.classList.add('is-down'); });
-    doc.addEventListener('pointerup', function () { ring.classList.remove('is-down'); });
-    doc.documentElement.addEventListener('mouseleave', function () { ring.classList.remove('is-on'); });
-  }
-
   /* Год в подвале */
   var y = doc.getElementById('year');
   if (y) { y.textContent = new Date().getFullYear(); }
