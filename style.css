@@ -415,3 +415,9 @@ div.post__a{cursor:default}
   .nav a:not(.btn){min-height:52px;font-size:19px}
   .nav .nav__cta{margin-top:16px}
 }
+
+/* Иллюстрации-заглушки */
+.ph-img{display:block;width:100%;height:auto;border-radius:var(--radius);border:1px solid var(--line);background:var(--card)}
+.ph-img--portrait{aspect-ratio:4/5;object-fit:cover}
+.work .ph-img{margin-bottom:18px;transition:transform .3s var(--ease)}
+@media (hover:hover){.work__link:hover .ph-img{transform:translateY(-6px)}}
