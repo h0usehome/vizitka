@@ -20,7 +20,7 @@
 """
 import html, json, math, re, datetime, pathlib
 
-SITE_URL = "https://ВАШ-ЛОГИН.github.io/ИМЯ-РЕПОЗИТОРИЯ"   # замените на адрес сайта
+SITE_URL = "https://h0usehome.github.io/vizitka/index.html"   # замените на адрес сайта
 STUDIO = "[Название студии]"
 HOME_COUNT = 3                                          # сколько статей на главной
 ROOT = pathlib.Path(__file__).parent
