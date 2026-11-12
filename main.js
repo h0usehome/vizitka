@@ -131,4 +131,39 @@
   /* Год в подвале */
   var y = doc.getElementById('year');
   if (y) { y.textContent = new Date().getFullYear(); }
+
+/* Слайдер проектов "Что мы уже сделали" */
+  var track = doc.querySelector('.slider-track');
+  var prevBtn = doc.querySelector('.prev-btn');
+  var nextBtn = doc.querySelector('.next-btn');
+
+  if (track && prevBtn && nextBtn) {
+    var slides = track.querySelectorAll('.work');
+    var currentIndex = 0;
+
+    function updateSlider() {
+      track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+    }
+
+    nextBtn.addEventListener('click', function () {
+      if (currentIndex < slides.length - 1) {
+        currentIndex++;
+      } else {
+        currentIndex = 0;
+      }
+      updateSlider();
+    });
+
+    prevBtn.addEventListener('click', function () {
+      if (currentIndex > 0) {
+        currentIndex--;
+      } else {
+        currentIndex = slides.length - 1;
+      }
+      updateSlider();
+    });
+  }
+
+
 })();
+

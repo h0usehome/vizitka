@@ -102,11 +102,27 @@ section[id]{scroll-margin-top:76px}
 .card{display:flex;flex-direction:column;padding:28px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);transition:transform .25s,box-shadow .25s}
 .card h3{font-size:23px;margin-bottom:10px}
 .card p{color:var(--muted)}
-.card__price{font-size:30px;align-self:flex-end;margin-top:auto!important;padding-top:20px;color:var(--ink)!important;font-weight:1000; margin-right: 35px}
-.card__price.todo{align-self:flex-start;margin-top:auto}
-.period{font-size:16px;color:var(--muted);font-weight:400}
-@media (hover:hover){.card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(21,23,28,.08)}}
+.card__price {
+    display: flex;
+    flex-direction: column; /* Ставит элементы друг под другом */
+    align-items: flex-end; /* Прижимает текст цены и приписку к правому краю */
+    width: max-content;
+    align-self: flex-end; /* Прижимает весь блок к правой стороне карточки */
+    font-size: 30px;
+    margin-top: auto!important;
+    padding-top: 20px;
+    color: var(--ink)!important;
+    font-weight: 1000;
+}
 
+.period {
+    font-size: 16px;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 2px; /* Небольшой отступ вниз от цифр */
+}
+
+@media (hover:hover){.card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(21,23,28,.08)}}
 /* О нас */
 .people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
 .person{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:24px;align-items:start;padding:20px;background:var(--card);border-radius:var(--radius);border:1px solid var(--line)}
@@ -170,7 +186,62 @@ section[id]{scroll-margin-top:76px}
 .checks--good li::before{content:"✓";background:var(--seo)}
 
 /* Примеры */
-.works{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+/* Убираем старый Grid и ставим стили слайдера */
+.slider-wrapper {
+  position: relative;
+  overflow: hidden;
+  padding: 0 40px;
+}
+
+.slider-track {
+  display: flex; /* Выстраиваем проекты в ряд */
+  transition: transform 0.4s ease-in-out;
+  width: 100%;
+}
+
+/* Жестко фиксируем ширину каждого слайда, запрещая сжатие */
+.work {
+    flex: 0 0 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+}
+
+/* Заставляем SVG-файл раскрыться по ширине контейнера */
+.work .ph-img {
+    width: 100%;
+    height: auto;
+    min-height: 250px; /* Базовая страховка высоты для SVG */
+    object-fit: contain; /* Сохраняет пропорции векторной графики, не обрезая края */
+    display: block;
+    margin-bottom: 18px;
+}
+
+/* Стили кнопок */
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.slider-btn:hover {
+  background-color: var(--ink);
+}
+
+.prev-btn { left: 0; }
+.next-btn { right: 0; }
 .work__link{display:block;text-decoration:none}
 .work .ph{margin-bottom:18px;transition:transform .3s}
 .work h3{font-size:22px;margin-bottom:4px}

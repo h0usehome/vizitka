@@ -24,7 +24,7 @@
 
 <header class="header" id="top">
   <div class="wrap header__in">
-    <a class="logo" href="#top" aria-label="[Название студии], на главную">
+    <a class="logo" href="duplicat.html#top" aria-label="[Название студии], на главную">
       <span class="logo__mark" aria-hidden="true">[Л]</span>
       <span class="logo__text">[Название студии]</span>
     </a>
@@ -80,13 +80,13 @@
         <span class="tag tag--dev">Разработка</span>
         <h3>Интернет-магазин</h3>
         <p>Каталог, корзина, оплата и доставка. Товары вы добавляете сами, без программиста.</p>
-        <p class="card__price">от 200$</p>
+        <p class="card__price">от 300$</p>
       </article>
       <article class="card">
         <span class="tag tag--dev">Разработка</span>
         <h3>Корпоративный сайт</h3>
         <p>Несколько разделов, услуги, блог, раздел «Частые вопросы». Удобно и вам, и клиентам.</p>
-        <p class="card__price">от 300$</p>
+        <p class="card__price">Договорная</p>
       </article>
       <article class="card">
         <span class="tag tag--seo">Продвижение</span>
@@ -116,25 +116,25 @@
     <header class="section__head">
       <p class="eyebrow">О нас</p>
       <h2>Двое, у каждого своя задача</h2>
-      <p class="lead">Вам не нужно искать разработчика, потом отдельно маркетолога и объяснять каждому задачу. Мы работаем вместе и отвечаем за результат.</p>
+      <p class="lead">Вам не нужно искать разработчика, потом отдельно маркетолога и объяснять каждому задачу. Мы работаем вместе и вместе отвечаем за результат.</p>
     </header>
 
     <div class="people">
       <article class="person">
         <img class="ph-img ph-img--portrait" src="img/person-1.svg" alt="Иллюстрация-заглушка на месте фотографии" width="400" height="500" loading="lazy">
         <div class="person__body">
-          <p class="tag tag--dev">Сайты</p>
+          <p class="tag tag--dev">Разработка сайтов</p>
           <h3 class="todo">Богдан</h3>
-          <p class="person__role">Разработка сайтов</p>
+          <p class="person__role">23 года, бизнес-аналитик</p>
           <p class="todo">[Пара предложений о себе: сколько лет делаете сайты, какие проекты, чем отличается ваш подход.]</p>
         </div>
       </article>
       <article class="person">
         <img class="ph-img ph-img--portrait" src="img/person-2.svg" alt="Иллюстрация-заглушка на месте фотографии" width="400" height="500" loading="lazy">
         <div class="person__body">
-          <p class="tag tag--seo">Продвижение</p>
+          <p class="tag tag--seo">SEO и продвижение</p>
           <h3 class="todo">Тимофей</h3>
-          <p class="person__role">SEO и реклама</p>
+          <p class="person__role">23 года, маркетолог</p>
           <p class="todo">[Пара предложений о нём: опыт в продвижении, какие результаты получали, с какими нишами работали.]</p>
         </div>
       </article>
@@ -216,38 +216,50 @@
     <header class="section__head">
       <p class="eyebrow">Примеры наших сайтов</p>
       <h2>Что мы уже сделали</h2>
-      <p class="lead">Нажмите на пример, чтобы открыть готовый сайт.</p>
     </header>
 
-    <div class="works">
-      <article class="work">
-        <a class="work__link" href="#" target="_blank" rel="noopener">
-          <img class="ph-img" src="img/work-1.svg" alt="Пример главной страницы сайта (иллюстрация-заглушка)" width="800" height="500" loading="lazy">
-          <h3 class="todo">[Название проекта]</h3>
-          <p class="work__meta todo">[Тип сайта] · [Ниша]</p>
-          <p class="work__res todo">[Результат: например, «+[N] заявок за [N] месяца»]</p>
-          <span class="work__go">Открыть сайт →</span>
-        </a>
-      </article>
-      <article class="work">
-        <a class="work__link" href="#" target="_blank" rel="noopener">
-          <img class="ph-img" src="img/work-2.svg" alt="Пример главной страницы сайта (иллюстрация-заглушка)" width="800" height="500" loading="lazy">
-          <h3 class="todo">[Название проекта]</h3>
-          <p class="work__meta todo">[Тип сайта] · [Ниша]</p>
-          <p class="work__res todo">[Результат: например, «первое место в поиске по запросу …»]</p>
-          <span class="work__go">Открыть сайт →</span>
-        </a>
-      </article>
-      <article class="work">
-        <a class="work__link" href="#" target="_blank" rel="noopener">
-          <img class="ph-img" src="img/work-3.svg" alt="Пример главной страницы сайта (иллюстрация-заглушка)" width="800" height="500" loading="lazy">
-          <h3 class="todo">[Название проекта]</h3>
-          <p class="work__meta todo">[Тип сайта] · [Ниша]</p>
-          <p class="work__res todo">[Результат проекта]</p>
-          <span class="work__go">Открыть сайт →</span>
-        </a>
-      </article>
-    </div>
+<div class="slider-wrapper">
+  <button class="slider-btn prev-btn">❮</button>
+
+  <div class="works slider-track">
+    
+    <!-- Первый проект -->
+    <article class="work">
+      <a class="work__link" href="#" target="_blank" rel="noopener">
+        <img class="ph-img" src="img/work-1.svg" alt="Пример главной">
+        <h3 class="todo">[Название проекта]</h3>
+        <p class="work__meta todo">[Тип сайта] · [Ниша]</p>
+        <p class="work__res todo">Результат: например, +[N] заявок за месяц</p>
+        <span class="work__go">Открыть сайт</span>
+      </a>
+    </article>
+
+    <!-- Второй проект -->
+    <article class="work">
+      <a class="work__link" href="#" target="_blank" rel="noopener">
+        <img class="ph-img" src="img/work-2.svg" alt="Пример главной">
+        <h3 class="todo">[Название проекта]</h3>
+        <p class="work__meta todo">[Тип сайта] · [Ниша]</p>
+        <p class="work__res todo">Результат: например, первое место в поиске</p>
+        <span class="work__go">Открыть сайт</span>
+      </a>
+    </article>
+
+    <!-- Третий проект -->
+    <article class="work">
+      <a class="work__link" href="#" target="_blank" rel="noopener">
+        <img class="ph-img" src="img/work-3.svg" alt="Пример главной">
+        <h3 class="todo">[Название проекта]</h3>
+        <p class="work__meta todo">[Тип сайта] · [Ниша]</p>
+        <p class="work__res todo">Результат: [ваш текст]</p>
+        <span class="work__go">Открыть сайт</span>
+      </a>
+    </article>
+
+  </div>
+
+  <button class="slider-btn next-btn">❯</button>
+</div>
   </div>
 </section>
 
