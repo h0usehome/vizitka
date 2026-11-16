@@ -37,7 +37,7 @@ export default {
     const page = clean(data.page, 200);
     if (name.length < 2 || phone.replace(/\D/g, '').length < 9) return reply(400, { ok: false });
 
-    const text = `<b>Новая заявка с сайта</b>\nИмя: ${name}\nТелефон: ${phone}\nСтраница: ${page}`;
+    const text = `<b>Новая заявка с сайта</b>\nИмя: ${name}\nТелефон: ${phone}`;
     const chats = String(env.CHAT_ID || '').split(',').map((s) => s.trim()).filter(Boolean);
     const results = await Promise.all(chats.map((chat_id) =>
       fetch(`https://api.telegram.org/bot${env.BOT_TOKEN}/sendMessage`, {
