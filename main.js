@@ -137,7 +137,7 @@
 /* ===== Заявка: модальное окно и отправка в Telegram ===== */
   // Адрес Cloudflare Worker, который пересылает заявку в Telegram (см. worker/README.md).
   // Пока адрес пустой, форма честно сообщает, что заявку нужно оставить по телефону.
-  var LEAD_ENDPOINT = 'vizitka.pinashin-official.workers.dev';
+  var LEAD_ENDPOINT = 'https://vizitka.pinashin-official.workers.dev';
 
   var modal = doc.getElementById('contact-modal');
   var form = doc.getElementById('contact-form');
