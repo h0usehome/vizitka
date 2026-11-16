@@ -20,8 +20,8 @@
 """
 import html, json, math, re, datetime, pathlib
 
-SITE_URL = "https://h0usehome.github.io/vizitka/index.html"   # замените на адрес сайта
-STUDIO = "[Название студии]"
+SITE_URL = "https://h0usehome.github.io/vizitka"   # адрес сайта без слеша в конце
+STUDIO = "OldTrueCompany"
 HOME_COUNT = 3                                          # сколько статей на главной
 ROOT = pathlib.Path(__file__).parent
 TAGS = {"dev": ("Разработка", "tag--dev"), "seo": ("Продвижение", "tag--seo"), "an": ("Аналитика", "tag--both")}

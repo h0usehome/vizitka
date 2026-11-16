@@ -41,7 +41,7 @@
   onScroll();
 
   /* Плавное появление блоков (если что-то пойдёт не так, всё просто покажется) */
-  var items = doc.querySelectorAll('.section__head, .card, .person, .facts li, .compare__col, .work, .qa, .post, .tabs, .contact__in > *');
+  var items = doc.querySelectorAll('.section__head, .card, .person, .facts li, .compare__col, .work, .step, .qa, .post, .tabs, .contact__in > *');
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if ('IntersectionObserver' in window && !reduce) {
     var io = new IntersectionObserver(function (entries) {
@@ -66,36 +66,6 @@
       if (d.open) { qa.forEach(function (o) { if (o !== d) { o.open = false; } }); }
     });
   });
-
-  /* Выбор ниши в «Какой сайт нужен» */
-  var cmp = doc.querySelector('.compare'), nTabs = doc.querySelectorAll('.tabs [data-i]');
-  // [адрес плохого, заголовок плохого, адрес хорошего, заголовок, текст, кнопка, три плюса]
-  var N = [
-    ['kompaniya-stroy-uslugi.ru','ДОБРО ПОЖАЛОВАТЬ НА НАШ САЙТ','kompaniya.by','Ремонт квартир под ключ за 45 дней','Фиксированная цена в договоре. Приедем на замер бесплатно.','Рассчитать стоимость','Цена в договоре|Гарантия 3 года|Отчёт по этапам'],
-    ['magazin-vse-dlya-vas.ru','ИНТЕРНЕТ-МАГАЗИН ТОВАРОВ ДЛЯ ВСЕХ','kofe-obzharka.by','Кофе из обжарки в день заказа','Доставка за 2 часа. На первый заказ скидка 10%.','Выбрать кофе','Свежая обжарка|Доставка от 2 часов|Возврат за 14 дней'],
-    ['med-centr-zdorovie-plus.ru','МЕДИЦИНСКИЙ ЦЕНТР ЗДОРОВЬЕ ПЛЮС','zuby.by','Лечим зубы без боли. Запись на сегодня','Осмотр и план лечения бесплатно. Цены в прайсе, без сюрпризов.','Записаться на приём','Без боли|Цены в прайсе|Гарантия на работу'],
-    ['yurist-pravo-konsultaciya.ru','ЮРИДИЧЕСКИЕ УСЛУГИ ДЛЯ ВСЕХ','pravo.by','Вернём деньги по спорному договору','Первая консультация бесплатно. Оплата за результат.','Описать ситуацию','Бесплатный разбор|Оплата за результат|Ответ за 1 день'],
-    ['[адрес-вашего-клиента].ru','[ЗАГОЛОВОК КАК У ВСЕХ]','[адрес].by','[Что вы продаёте и кому]','[Одно предложение с выгодой и сроком]','[Действие]','[Плюс 1]|[Плюс 2]|[Плюс 3]']
-  ];
-  function niche(i) {
-    var n = N[i], g = n[6].split('|'), u = cmp.querySelectorAll('.mock__bar span');
-    u[0].textContent = n[0]; u[1].textContent = n[2];
-    cmp.querySelector('.bad-title').textContent = n[1];
-    cmp.querySelector('.good-title').textContent = n[3];
-    cmp.querySelector('.good-text').textContent = n[4];
-    cmp.querySelector('.good-btn').textContent = n[5];
-    cmp.querySelectorAll('.good-row b').forEach(function (b, k) { b.textContent = g[k]; });
-  }
-  if (cmp) {
-    nTabs.forEach(function (t) {
-      t.addEventListener('click', function () {
-        if (t.getAttribute('aria-pressed') === 'true') { return; }
-        nTabs.forEach(function (o) { o.setAttribute('aria-pressed', o === t ? 'true' : 'false'); });
-        cmp.classList.add('is-swap');
-        setTimeout(function () { niche(+t.dataset.i); cmp.classList.remove('is-swap'); }, 180);
-      });
-    });
-  }
 
   /* Фильтр статей в блоге */
   var fb = doc.querySelectorAll('.tabs [data-f]'), posts = doc.querySelectorAll('.posts--blog .post');
@@ -164,73 +134,95 @@
     });
   }
 
-/* ===== Модальное окно (Оставить заявку) ===== */
-  var modalBtn = doc.getElementById('open-modal-btn');
-  var modalOverlay = doc.getElementById('contact-modal');
-  var modalClose = doc.getElementById('close-modal-btn');
-  var contactForm = doc.getElementById('contact-form');
+/* ===== Заявка: модальное окно и отправка в Telegram ===== */
+  // Адрес Cloudflare Worker, который пересылает заявку в Telegram (см. worker/README.md).
+  // Пока адрес пустой, форма честно сообщает, что заявку нужно оставить по телефону.
+  var LEAD_ENDPOINT = '';
 
-  if (modalBtn && modalOverlay && modalClose) {
-    // Открыть модалку
-    modalBtn.addEventListener('click', function(e) {
-      e.preventDefault(); // Отменяем стандартный переход по ссылке
-      modalOverlay.classList.add('is-open');
-      modalOverlay.setAttribute('aria-hidden', 'false');
-      doc.body.style.overflow = 'hidden'; // Запрещаем прокрутку страницы под окном
-    });
+  var modal = doc.getElementById('contact-modal');
+  var form = doc.getElementById('contact-form');
+  var lastFocus = null;
 
-    // Функция закрытия
-    function closeModal() {
-      modalOverlay.classList.remove('is-open');
-      modalOverlay.setAttribute('aria-hidden', 'true');
-      doc.body.style.overflow = ''; // Возвращаем прокрутку
-    }
+  function openModal(e) {
+    if (e) { e.preventDefault(); }
+    lastFocus = doc.activeElement;
+    setMenu(false);
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    doc.body.style.overflow = 'hidden';
+    setTimeout(function () { var f = doc.getElementById('userName'); if (f) { f.focus(); } }, 50);
+  }
+  function closeModal() {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    doc.body.style.overflow = '';
+    if (lastFocus && lastFocus.focus) { lastFocus.focus(); }
+  }
 
-    // Закрыть по крестику
-    modalClose.addEventListener('click', closeModal);
-
-    // Закрыть по клику вне формы (по темному фону)
-    modalOverlay.addEventListener('click', function(e) {
-      if (e.target === modalOverlay) {
-        closeModal();
+  if (modal && form) {
+    doc.querySelectorAll('[data-modal]').forEach(function (b) { b.addEventListener('click', openModal); });
+    doc.getElementById('close-modal-btn').addEventListener('click', closeModal);
+    modal.addEventListener('click', function (e) { if (e.target === modal) { closeModal(); } });
+    doc.addEventListener('keydown', function (e) {
+      if (!modal.classList.contains('is-open')) { return; }
+      if (e.key === 'Escape') { closeModal(); return; }
+      if (e.key === 'Tab') { // фокус не уходит за пределы окна
+        var f = modal.querySelectorAll('button, input:not([tabindex="-1"]), a[href]');
+        var first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && doc.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && doc.activeElement === last) { e.preventDefault(); first.focus(); }
       }
     });
 
-    // Закрыть по клавише Escape
-    doc.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && modalOverlay.classList.contains('is-open')) {
-        closeModal();
-      }
+    /* Маска телефона: +375 (29) 123-45-67 */
+    var phone = doc.getElementById('userPhone');
+    function fmtPhone(v) {
+      var d = v.replace(/\D/g, '');
+      if (d.indexOf('375') !== 0) { d = '375' + d.replace(/^(80|8)/, ''); }
+      d = d.slice(3, 12);
+      var out = '+375';
+      if (d.length) { out += ' (' + d.slice(0, 2); }
+      if (d.length >= 2) { out += ')'; }
+      if (d.length > 2) { out += ' ' + d.slice(2, 5); }
+      if (d.length > 5) { out += '-' + d.slice(5, 7); }
+      if (d.length > 7) { out += '-' + d.slice(7, 9); }
+      return out;
+    }
+    phone.addEventListener('focus', function () { if (!phone.value) { phone.value = '+375 ('; } });
+    phone.addEventListener('blur', function () { if (phone.value.replace(/\D/g, '').length <= 3) { phone.value = ''; } });
+    phone.addEventListener('input', function (e) {
+      if (e.inputType && e.inputType.indexOf('delete') === 0) { return; } // не мешаем стирать
+      phone.value = fmtPhone(phone.value);
     });
 
-    // Обработка отправки формы (заглушка до создания бэкенда)
-    if (contactForm) {
-      contactForm.addEventListener('submit', function(e) {
-        e.preventDefault(); // Не даем странице перезагрузиться
-        
-        // Позже здесь будет fetch-запрос к Telegram-боту
-        var name = doc.getElementById('userName').value;
-        var phone = doc.getElementById('userPhone').value;
-        
-        console.log('Готовим к отправке:', name, phone);
-        
-        // Меняем текст кнопки для вида
-        var submitBtn = contactForm.querySelector('.modal-submit');
-        var originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Отправлено!';
-        submitBtn.style.backgroundColor = 'var(--seo)'; // зеленый цвет успешности
-        submitBtn.style.borderColor = 'var(--seo)';
+    var status = doc.getElementById('form-status');
+    var submitBtn = form.querySelector('.modal-submit');
+    function say(text, kind) { status.textContent = text; status.className = 'form-status' + (kind ? ' is-' + kind : ''); }
 
-        // Через 2 секунды закрываем окно и очищаем форму
-        setTimeout(function() {
-          closeModal();
-          contactForm.reset();
-          submitBtn.textContent = originalText;
-          submitBtn.style.backgroundColor = '';
-          submitBtn.style.borderColor = '';
-        }, 2000);
-      });
-    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var nameEl = doc.getElementById('userName'), name = nameEl.value.trim();
+      var digits = phone.value.replace(/\D/g, '');
+      if (name.length < 2) { say('Напишите, как к вам обращаться.', 'err'); nameEl.focus(); return; }
+      if (digits.length !== 12) { say('Проверьте номер: нужно 9 цифр после +375.', 'err'); phone.focus(); return; }
+      if (!LEAD_ENDPOINT) {
+        say('Форма пока не подключена. Позвоните нам: +375 29 160-61-75.', 'err');
+        return;
+      }
+      submitBtn.disabled = true;
+      say('Отправляем…');
+      fetch(LEAD_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name, phone: phone.value, website: doc.getElementById('userSite').value, page: location.href })
+      }).then(function (r) {
+        if (!r.ok) { throw new Error(r.status); }
+        say('Спасибо! Заявка отправлена, мы перезвоним в течение дня.', 'ok');
+        form.reset();
+        setTimeout(function () { closeModal(); say(''); }, 3000);
+      }).catch(function () {
+        say('Не получилось отправить. Позвоните нам: +375 29 160-61-75.', 'err');
+      }).then(function () { submitBtn.disabled = false; });
+    });
   }
 })();
-

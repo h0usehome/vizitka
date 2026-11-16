@@ -27,7 +27,7 @@ jobs:
       - name: Подготовить сайт
         run: |
           mkdir _site
-          rsync -a --exclude='.git' --exclude='.github' --exclude='_site' --exclude='posts' --exclude='templates' --exclude='build.py' ./ _site/
+          rsync -a --exclude='.git' --exclude='.github' --exclude='_site' --exclude='posts' --exclude='templates' --exclude='build.py' --exclude='worker' --exclude='README.md' ./ _site/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
