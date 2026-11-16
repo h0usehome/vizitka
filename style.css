@@ -7,7 +7,7 @@
   --ink:#0E1220; --muted:#4A5163;
   --accent:#2D4BFF; --accent-dark:#1E36D1; --accent-soft:#AEBBFF;
   --dev:#2338C9; --dev-bg:#E3E8FF; --seo:#0B7A4F; --seo-bg:#D9F2E6; --both:#5B2CB3; --both-bg:#EBE1FB;
-  --todo:#FFF1B8;
+  --todo:#ffffff;
 }
 :root[data-palette="forest"]{
   --bg:#F3F5F0; --bg-alt:#E5EADF; --line:#D2D9C9; --ink:#14201A; --muted:#4A5750;
@@ -56,7 +56,7 @@ section[id]{scroll-margin-top:76px}
 .btn--sm{min-height:44px;padding:0 20px;font-size:16px}
 .btn--light{background:#fff;color:var(--ink);border-color:#fff}
 .btn--light:hover{background:var(--bg-alt);border-color:var(--bg-alt)}
-.eyebrow{margin-bottom:14px;font-size:15px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.eyebrow{margin-bottom:14px;font:700 40px/1 var(--font);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
 .eyebrow--light{color:var(--accent-soft)}
 .tag{display:inline-block;margin-bottom:14px;padding:4px 12px;border-radius:999px;font-size:14px;font-weight:700;line-height:1.5;background:var(--dev-bg);color:var(--dev)}
 .tag--seo{background:var(--seo-bg);color:var(--seo)}
@@ -68,9 +68,20 @@ section[id]{scroll-margin-top:76px}
 .header.is-stuck{border-color:var(--line)}
 .header__in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:68px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:19px}
-.logo__mark{display:grid;place-items:center;width:38px;height:38px;border-radius:9px;background:var(--ink);color:#fff;font-size:14px}
+.logo__mark {
+  display: grid;
+  place-items: center;
+  width: auto;             /* Разрешаем блоку растягиваться под длину текста */
+  min-width: 38px;         /* Минимальная ширина, чтобы не терять форму квадрата при коротком тексте */
+  padding: 0 10px;         /* Добавляем отступы слева и справа, чтобы текст не прилипал к краям */
+  height: 38px;            /* Оставляем высоту прежней */
+  border-radius: 9px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 14px;
+}
 .nav{display:flex;align-items:center;gap:6px}
-.nav a{padding:10px 12px;font-size:16px;font-weight:600;text-decoration:none;color:var(--muted);border-radius:8px}
+.nav a{padding:10px 12px;font:12px/1 var(--font);font-weight:600;text-decoration:none;color:var(--muted);border-radius:8px}
 .nav a:hover{color:var(--ink)}
 .nav .nav__cta{margin-left:10px;color:#fff;padding:0 20px}
 .nav .nav__cta:hover{color:#fff}
@@ -272,7 +283,24 @@ section[id]{scroll-margin-top:76px}
 .contact__a:hover{border-color:#fff}
 .contact__a span{font-size:14px;color:color-mix(in srgb,#fff 62%,var(--ink))}
 .contact__a b{font-size:21px}
-.contact .todo{color:var(--ink)}
+.contact .todo{color:var(--ink); margin-bottom: 5px;}
+/* Стили для отдельных номеров */
+.contact__a a {
+  text-decoration: none;
+  color: inherit;
+  width: 220px; /* Задаем одинаковую жесткую ширину для обеих кнопок */
+  transition: opacity 0.2s;
+}
+
+/* Заставляем белый фон растянуться на всю ширину ссылки */
+.contact__a a b.todo {
+  display: block;
+  text-align: center; /* Выравниваем сам номер по центру плашки */
+}
+
+.contact__a a:hover {
+  opacity: 0.7;
+}
 
 .footer{padding:28px 0;background:var(--ink);border-top:1px solid color-mix(in srgb,#fff 12%,var(--ink));color:color-mix(in srgb,#fff 62%,var(--ink));font-size:15px}
 .footer__in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
@@ -506,3 +534,111 @@ div.post__a{cursor:default}
 .ph-img--portrait{aspect-ratio:4/5;object-fit:cover}
 .work .ph-img{margin-bottom:18px;transition:transform .3s var(--ease)}
 @media (hover:hover){.work__link:hover .ph-img{transform:translateY(-6px)}}
+
+
+/* ===== Всплывающее окно (Модалка) ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(14, 18, 32, 0.6); /* Темный полупрозрачный фон */
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  padding: 20px;
+}
+
+/* Класс, который JS будет добавлять для показа окна */
+.modal-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: var(--card);
+  width: 100%;
+  max-width: 440px;
+  padding: 40px;
+  border-radius: var(--radius);
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  color: var(--ink); /* Чтобы текст на черном сайте был виден внутри белой формы */
+}
+
+.modal-overlay.is-open .modal-content {
+  transform: translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: var(--accent);
+}
+
+.modal-title {
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+.modal-subtitle {
+  color: var(--muted);
+  margin-bottom: 24px;
+  font-size: 15px;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.form-group input {
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  border-color: var(--accent);
+}
+
+.modal-submit {
+  margin-top: 10px;
+  width: 100%;
+}

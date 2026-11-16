@@ -164,6 +164,73 @@
     });
   }
 
+/* ===== Модальное окно (Оставить заявку) ===== */
+  var modalBtn = doc.getElementById('open-modal-btn');
+  var modalOverlay = doc.getElementById('contact-modal');
+  var modalClose = doc.getElementById('close-modal-btn');
+  var contactForm = doc.getElementById('contact-form');
 
+  if (modalBtn && modalOverlay && modalClose) {
+    // Открыть модалку
+    modalBtn.addEventListener('click', function(e) {
+      e.preventDefault(); // Отменяем стандартный переход по ссылке
+      modalOverlay.classList.add('is-open');
+      modalOverlay.setAttribute('aria-hidden', 'false');
+      doc.body.style.overflow = 'hidden'; // Запрещаем прокрутку страницы под окном
+    });
+
+    // Функция закрытия
+    function closeModal() {
+      modalOverlay.classList.remove('is-open');
+      modalOverlay.setAttribute('aria-hidden', 'true');
+      doc.body.style.overflow = ''; // Возвращаем прокрутку
+    }
+
+    // Закрыть по крестику
+    modalClose.addEventListener('click', closeModal);
+
+    // Закрыть по клику вне формы (по темному фону)
+    modalOverlay.addEventListener('click', function(e) {
+      if (e.target === modalOverlay) {
+        closeModal();
+      }
+    });
+
+    // Закрыть по клавише Escape
+    doc.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('is-open')) {
+        closeModal();
+      }
+    });
+
+    // Обработка отправки формы (заглушка до создания бэкенда)
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault(); // Не даем странице перезагрузиться
+        
+        // Позже здесь будет fetch-запрос к Telegram-боту
+        var name = doc.getElementById('userName').value;
+        var phone = doc.getElementById('userPhone').value;
+        
+        console.log('Готовим к отправке:', name, phone);
+        
+        // Меняем текст кнопки для вида
+        var submitBtn = contactForm.querySelector('.modal-submit');
+        var originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Отправлено!';
+        submitBtn.style.backgroundColor = 'var(--seo)'; // зеленый цвет успешности
+        submitBtn.style.borderColor = 'var(--seo)';
+
+        // Через 2 секунды закрываем окно и очищаем форму
+        setTimeout(function() {
+          closeModal();
+          contactForm.reset();
+          submitBtn.textContent = originalText;
+          submitBtn.style.backgroundColor = '';
+          submitBtn.style.borderColor = '';
+        }, 2000);
+      });
+    }
+  }
 })();
 
