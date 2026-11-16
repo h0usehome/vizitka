@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://h0usehome.github.io/vizitka/index.html/</loc></url>
-  <url><loc>https://h0usehome.github.io/vizitka/index.html/blog.html</loc></url>
-  <url><loc>https://h0usehome.github.io/vizitka/index.html/blog/seo-dlya-magizana.html</loc></url>
-  <url><loc>https://h0usehome.github.io/vizitka/index.html/blog/core-web-vitals.html</loc></url>
-  <url><loc>https://h0usehome.github.io/vizitka/index.html/blog/li-v-seo.html</loc></url>
+  <url><loc>https://h0usehome.github.io/vizitka/</loc></url>
+  <url><loc>https://h0usehome.github.io/vizitka/blog.html</loc></url>
+  <url><loc>https://h0usehome.github.io/vizitka/blog/core-web-vitals.html</loc></url>
+  <url><loc>https://h0usehome.github.io/vizitka/blog/li-v-seo.html</loc></url>
 </urlset>

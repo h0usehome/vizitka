@@ -3,14 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>[Название студии]: коммерческие сайты и их продвижение</title>
+<title>OldTrueCompany: коммерческие сайты и их продвижение</title>
 <meta name="description" content="Создаём коммерческие сайты и продвигаем их в поиске. Один отвечает за разработку, другой за трафик: заявки приходят с первого месяца.">
 <meta name="theme-color" content="#F5F6FA">
 <meta property="og:type" content="website">
-<meta property="og:title" content="[Название студии]: коммерческие сайты и их продвижение">
+<meta property="og:title" content="OldTrueCompany: коммерческие сайты и их продвижение">
 <meta property="og:description" content="Разрабатываем сайты, которые приводят клиентов, и продвигаем их в поиске.">
 
-<link rel="icon" href="img/favicon.ico" type="image/svg+xml">
+<link rel="icon" href="img/favicon.ico" sizes="any">
+<link rel="canonical" href="https://h0usehome.github.io/vizitka/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -23,18 +24,19 @@
 
 <header class="header" id="top">
   <div class="wrap header__in">
-    <a class="logo" href="duplicat.html#top" aria-label="[Название студии], на главную">
-      <span class="logo__mark" aria-hidden="true">[OTC]</span>
-      <span class="logo__text">[OldTrueCompany]</span>
+    <a class="logo" href="#top" aria-label="OldTrueCompany, на главную">
+      <span class="logo__mark" aria-hidden="true">OTC</span>
+      <span class="logo__text">OldTrueCompany</span>
     </a>
     <nav class="nav" id="nav" aria-label="Разделы сайта">
       <a href="#services">Услуги</a>
       <a href="#about">О нас</a>
       <a href="#compare">Какой сайт нужен</a>
+      <a href="#process">Как работаем</a>
       <a href="#works">Примеры</a>
       <a href="blog.html">Блог</a>
       <a href="#faq">Вопросы</a>
-      <a class="btn btn--sm nav__cta" href="#contact">Обсудить проект</a>
+      <a class="btn btn--sm nav__cta" href="#contact" data-modal>Обсудить проект</a>
     </nav>
     <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
       <span></span><span></span><span></span>
@@ -52,7 +54,7 @@
       <h1>Сайты, которые <span class="hl">приводят клиентов</span>, а не просто существуют</h1>
       <p class="lead">Мы вдвоём закрываем весь путь: один делает сайт, который понятно продаёт, другой приводит на него людей из поиска и рекламы.</p>
       <div class="hero__btns">
-        <a class="btn" href="#contact">Обсудить проект</a>
+        <a class="btn" href="#contact" data-modal>Обсудить проект</a>
         <a class="btn btn--ghost" href="#works">Посмотреть примеры</a>
       </div>
     </div>
@@ -123,7 +125,7 @@
         <img class="ph-img ph-img--portrait" src="img/person-1.svg" alt="Иллюстрация-заглушка на месте фотографии" width="400" height="500" loading="lazy">
         <div class="person__body">
           <p class="tag tag--dev">Разработка сайтов</p>
-          <h3 class="todo">Богдан</h3>
+          <h3>Богдан</h3>
           <p class="person__role">23 года, бизнес-аналитик</p>
           <p class="todo">[Пара предложений о себе: сколько лет делаете сайты, какие проекты, чем отличается ваш подход.]</p>
         </div>
@@ -132,7 +134,7 @@
         <img class="ph-img ph-img--portrait" src="img/person-2.svg" alt="Иллюстрация-заглушка на месте фотографии" width="400" height="500" loading="lazy">
         <div class="person__body">
           <p class="tag tag--seo">SEO и продвижение</p>
-          <h3 class="todo">Тимофей</h3>
+          <h3>Тимофей</h3>
           <p class="person__role">23 года, маркетолог</p>
           <p class="todo">[Пара предложений о нём: опыт в продвижении, какие результаты получали, с какими нишами работали.]</p>
         </div>
@@ -153,112 +155,162 @@
     <header class="section__head">
       <p class="eyebrow">Какой сайт нужен</p>
       <h2>Два сайта одной компании. Угадайте, где заказывают</h2>
-      <p class="lead">Выберите нишу: слева то, что мы чаще всего видим у клиентов, справа то, что делаем мы.</p>
+      <p class="lead">Одна и та же фирма по ремонту квартир. Слева сайт, какой мы чаще всего видим у клиентов, справа сайт, какой делаем мы. Цифры на макетах совпадают с пунктами под ними.</p>
     </header>
-
-    <div class="tabs" role="group" aria-label="Выберите нишу бизнеса">
-      <button type="button" class="tab" aria-pressed="true" data-i="0">Ремонт</button>
-      <button type="button" class="tab" aria-pressed="false" data-i="1">Интернет-магазин</button>
-      <button type="button" class="tab" aria-pressed="false" data-i="2">Клиника</button>
-      <button type="button" class="tab" aria-pressed="false" data-i="3">Юридические услуги</button>
-      <button type="button" class="tab todo" aria-pressed="false" data-i="4">[Ещё ниша]</button>
-    </div>
 
     <div class="compare">
       <article class="compare__col compare__col--bad">
-        <p class="compare__label">Плохой сайт</p>
-        <div class="mock mock--bad" role="img" aria-label="Схема плохого сайта: пёстрые цвета, мелкий текст, много баннеров, нет понятной кнопки">
-          <div class="mock__bar"><i></i><i></i><i></i><span>kompaniya-stroy-uslugi.ru</span></div>
+        <p class="compare__label">Так делать не надо</p>
+        <div class="mock mock--bad" role="img" aria-label="Макет устаревшего сайта: мелкое меню, баннер «Добро пожаловать», сплошной текст, счётчик посещений и всплывающий чат поверх содержимого">
+          <div class="mock__bar"><i></i><i></i><i></i><span>stroy-servis-plus.narod.ru</span></div>
           <div class="mock__body">
-            <p class="bad-ticker"><span>!!! АКЦИЯ !!! СКИДКИ !!! ЗВОНИТЕ !!! &nbsp;!!! АКЦИЯ !!! СКИДКИ !!! ЗВОНИТЕ !!! &nbsp;</span></p>
-            <p class="bad-title">ДОБРО ПОЖАЛОВАТЬ НА НАШ САЙТ</p>
-            <p class="bad-text">Наша компания основана давно и занимается разными услугами для клиентов в разных сферах деятельности и не только, мы лучшие в городе и области...</p>
-            <div class="bad-row"><b>Баннер</b><b>Баннер</b><b>Реклама</b></div>
-            <p class="bad-text">Контакты внизу, ищите внимательнее</p>
+            <div class="b-top"><span>Тел: 8(029)xxx-xx-xx, 8(029)xxx-xx-xx, 8(017)xxx-xx-xx, факс...</span><span>Мы работаем с 2009 года!!!</span></div>
+            <div class="b-head">
+              <b class="b-logo">СТРОЙ-СЕРВИС<small>ПЛЮС</small><i class="pin pin--bad">1</i></b>
+              <ul class="b-menu"><li>Главная</li><li>О компании</li><li>История</li><li>Новости</li><li>Услуги</li><li>Лицензии</li><li>Партнёры</li><li>Вакансии</li><li>Гостевая</li><li>Контакты</li></ul>
+            </div>
+            <div class="b-main">
+              <div>
+                <div class="b-slide"><span>ДОБРО ПОЖАЛОВАТЬ!</span><em>• • • • •</em></div>
+                <p class="b-text"><i class="pin pin--bad">2</i>ООО «Строй-Сервис Плюс» является динамично развивающейся компанией на рынке строительных и ремонтно-отделочных услуг. Наша компания предлагает широкий спектр услуг для физических и юридических лиц. Индивидуальный подход к каждому клиенту, высокое качество, доступные цены, опытные специалисты, современное оборудование. Подробнее о ценах уточняйте по телефону...</p>
+              </div>
+              <aside class="b-side">
+                <b>НОВОСТИ <i class="pin pin--bad">3</i></b>
+                <p>12.03.2014 Мы обновили сайт!</p>
+                <p>01.01.2014 С Новым годом!</p>
+                <span class="b-count">Посетителей: 0012847</span>
+              </aside>
+            </div>
+            <div class="b-chat"><i class="pin pin--bad">4</i>Онлайн-консультант<small>Здравствуйте! Чем могу помочь?</small></div>
           </div>
         </div>
-        <ul class="checks checks--bad">
-          <li>Непонятно, чем занимается компания</li>
-          <li>Мелкий текст на пёстром фоне</li>
-          <li>Нет заметной кнопки «Позвонить» или «Оставить заявку»</li>
-          <li>Ломается на телефоне, долго грузится</li>
-        </ul>
+        <ol class="checks checks--bad">
+          <li><b>Непонятно, что предлагают.</b> Десять пунктов меню и «Добро пожаловать» вместо ответа на вопрос «что вы делаете и сколько стоит».</li>
+          <li><b>Стена текста.</b> Общие слова, которые есть на любом сайте, и ни одной цифры: ни цены, ни сроков.</li>
+          <li><b>Нет повода доверять.</b> Последняя новость 2014 года, нет фото работ и отзывов.</li>
+          <li><b>Связаться неудобно.</b> Номера мелким шрифтом в углу, а чат закрывает содержимое.</li>
+        </ol>
       </article>
 
       <article class="compare__col compare__col--good">
         <p class="compare__label">Сайт, который делаем мы</p>
-        <div class="mock mock--good" role="img" aria-label="Схема хорошего сайта: понятный заголовок, крупная кнопка, три преимущества">
-          <div class="mock__bar"><i></i><i></i><i></i><span>kompaniya.by</span></div>
+        <div class="mock mock--good" role="img" aria-label="Макет хорошего сайта: короткое меню и телефон, заголовок с услугой и сроком, цена за метр, кнопка расчёта, рейтинг и фото объекта">
+          <div class="mock__bar"><i></i><i></i><i></i><span>remont-minsk.by</span></div>
           <div class="mock__body">
-            <div class="good-nav"><b>Логотип</b><span></span><span></span><em>Позвонить</em></div>
-            <p class="good-title">Ремонт квартир под ключ за 45 дней</p>
-            <p class="good-text">Фиксированная цена в договоре. Приедем на замер бесплатно.</p>
-            <p class="good-btn">Рассчитать стоимость</p>
-            <div class="good-row"><b>Цена в договоре</b><b>Гарантия 3 года</b><b>Отчёт по этапам</b></div>
+            <div class="g-nav"><b>Ремонт<span>.by</span></b><span class="g-links"><i>Цены</i><i>Работы</i><i>Отзывы</i></span><i class="pin pin--good">4</i><span class="g-phone">+375 29 000-00-00</span></div>
+            <div class="g-hero">
+              <div>
+                <p class="g-eyebrow">Минск и пригород <i class="pin pin--good">1</i></p>
+                <p class="g-title">Ремонт квартир под ключ за 45 дней</p>
+                <p class="g-text">Цена фиксируется в договоре и не растёт. Замер и смета бесплатно.</p>
+                <div class="g-btns"><span class="g-btn">Рассчитать стоимость</span><span class="g-btn g-btn--ghost">Смотреть работы</span></div>
+                <p class="g-trust"><b>★ 4,9</b> 128 отзывов · 340 сданных квартир <i class="pin pin--good">3</i></p>
+              </div>
+              <div class="g-photo">
+                <span class="g-price">от 95 BYN/м²</span>
+                <span class="g-cap">ЖК «Минск Мир», 64 м² · 41 день</span>
+              </div>
+            </div>
+            <div class="g-row"><i class="pin pin--good">2</i><b><i>✓</i>Цена в договоре</b><b><i>✓</i>Гарантия 3 года</b><b><i>✓</i>Фотоотчёт по этапам</b></div>
           </div>
         </div>
-        <ul class="checks checks--good">
-          <li>В первом экране понятно, что и для кого</li>
-          <li>Крупный текст, много воздуха, ничего лишнего</li>
-          <li>Кнопка связи видна в каждом блоке</li>
-          <li>Удобно с телефона, быстро открывается</li>
-        </ul>
+        <ol class="checks checks--good">
+          <li><b>Суть за 3 секунды.</b> Заголовок говорит, что делают, где и за какой срок.</li>
+          <li><b>Цифры вместо общих слов.</b> Цена за метр, срок, гарантия видны сразу.</li>
+          <li><b>Доказательства.</b> Рейтинг, число отзывов и реальные объекты с фото.</li>
+          <li><b>Связаться в одно касание.</b> Телефон в шапке и заметная кнопка расчёта в каждом блоке.</li>
+        </ol>
       </article>
     </div>
-    <!-- По желанию: замените схемы на реальные скриншоты «до» и «после» (блок .mock) -->
   </div>
 </section>
 
-<!-- ============ 5. Примеры наших сайтов ============ -->
+<!-- ============ 5. Примеры сайтов, которые мы можем сделать ============ -->
 <section class="section section--alt" id="works">
   <div class="wrap">
     <header class="section__head">
-      <p class="eyebrow">Примеры наших сайтов</p>
-      <h2>Что мы уже сделали</h2>
+      <p class="eyebrow">Примеры</p>
+      <h2>Какие сайты мы можем сделать</h2>
+      <p class="lead">Это концепты: так может выглядеть сайт в разных нишах. Под каждый проект дизайн и тексты делаем с нуля, без шаблонов.</p>
     </header>
 
-<div class="slider-wrapper">
-  <button class="slider-btn prev-btn">❮</button>
+    <div class="slider-wrapper">
+      <button class="slider-btn prev-btn" type="button" aria-label="Предыдущий пример">❮</button>
 
-  <div class="works slider-track">
-    
-    <!-- Первый проект -->
-    <article class="work">
-      <a class="work__link" href="#" target="_blank" rel="noopener">
-        <img class="ph-img" src="img/work-1.svg" alt="Пример главной">
-        <h3 class="todo">[Название проекта]</h3>
-        <p class="work__meta todo">[Тип сайта] · [Ниша]</p>
-        <p class="work__res todo">Результат: например, +[N] заявок за месяц</p>
-        <span class="work__go">Открыть сайт</span>
-      </a>
-    </article>
+      <div class="slider-viewport">
+      <div class="works slider-track">
+        <article class="work">
+          <img class="ph-img" src="img/work-1.svg" alt="Концепт главной страницы лендинга автосервиса" width="800" height="500" loading="lazy">
+          <h3>Лендинг для автосервиса</h3>
+          <p class="work__meta">Лендинг · Автосервис</p>
+          <p class="work__res">Онлайн-запись на удобное время, прайс на популярные работы, отзывы и схема проезда. Задача сайта: звонки и записи на ремонт.</p>
+          <a class="work__go" href="#contact" data-modal>Хочу такой сайт</a>
+        </article>
 
-    <!-- Второй проект -->
-    <article class="work">
-      <a class="work__link" href="#" target="_blank" rel="noopener">
-        <img class="ph-img" src="img/work-2.svg" alt="Пример главной">
-        <h3 class="todo">[Название проекта]</h3>
-        <p class="work__meta todo">[Тип сайта] · [Ниша]</p>
-        <p class="work__res todo">Результат: например, первое место в поиске</p>
-        <span class="work__go">Открыть сайт</span>
-      </a>
-    </article>
+        <article class="work">
+          <img class="ph-img" src="img/work-2.svg" alt="Концепт интернет-магазина кофе" width="800" height="500" loading="lazy">
+          <h3>Интернет-магазин свежеобжаренного кофе</h3>
+          <p class="work__meta">Интернет-магазин · Еда и напитки</p>
+          <p class="work__res">Каталог с фильтром по вкусу и способу заваривания, корзина, оплата картой и подписка на регулярную доставку.</p>
+          <a class="work__go" href="#contact" data-modal>Хочу такой сайт</a>
+        </article>
 
-    <!-- Третий проект -->
-    <article class="work">
-      <a class="work__link" href="#" target="_blank" rel="noopener">
-        <img class="ph-img" src="img/work-3.svg" alt="Пример главной">
-        <h3 class="todo">[Название проекта]</h3>
-        <p class="work__meta todo">[Тип сайта] · [Ниша]</p>
-        <p class="work__res todo">Результат: [ваш текст]</p>
-        <span class="work__go">Открыть сайт</span>
-      </a>
-    </article>
+        <article class="work">
+          <img class="ph-img" src="img/work-3.svg" alt="Концепт сайта стоматологической клиники" width="800" height="500" loading="lazy">
+          <h3>Сайт стоматологической клиники</h3>
+          <p class="work__meta">Корпоративный сайт · Медицина</p>
+          <p class="work__res">Врачи и их опыт, понятный прайс, запись к нужному специалисту и ответы на вопросы, которые пациенты задают по телефону.</p>
+          <a class="work__go" href="#contact" data-modal>Хочу такой сайт</a>
+        </article>
+      </div>
+      </div>
 
+      <button class="slider-btn next-btn" type="button" aria-label="Следующий пример">❯</button>
+    </div>
   </div>
+</section>
 
-  <button class="slider-btn next-btn">❯</button>
-</div>
+<!-- ============ 6. Как мы работаем ============ -->
+<section class="section" id="process">
+  <div class="wrap">
+    <header class="section__head">
+      <p class="eyebrow">Как мы работаем</p>
+      <h2>От заявки до первых клиентов</h2>
+      <p class="lead">На каждом этапе вы знаете, что происходит и что будет дальше. Цену и срок фиксируем до начала работы.</p>
+    </header>
+
+    <ol class="steps">
+      <li class="step">
+        <span class="step__n">01</span>
+        <h3>Знакомство</h3>
+        <p>Созваниваемся, узнаём о бизнесе, клиентах и цели сайта. Называем стоимость и срок.</p>
+        <p class="step__time">1 день</p>
+      </li>
+      <li class="step">
+        <span class="step__n">02</span>
+        <h3>Договор и структура</h3>
+        <p>Фиксируем цену в договоре. Составляем план: какие блоки и в каком порядке убедят клиента.</p>
+        <p class="step__time">1–2 дня</p>
+      </li>
+      <li class="step">
+        <span class="step__n">03</span>
+        <h3>Дизайн и тексты</h3>
+        <p>Пишем тексты и рисуем дизайн. Показываем вам и вносим правки до утверждения.</p>
+        <p class="step__time">от 2 дней</p>
+      </li>
+      <li class="step">
+        <span class="step__n">04</span>
+        <h3>Разработка и запуск</h3>
+        <p>Собираем сайт, проверяем на телефонах, подключаем домен, хостинг и аналитику.</p>
+        <p class="step__time">от 2 дней</p>
+      </li>
+      <li class="step">
+        <span class="step__n">05</span>
+        <h3>Продвижение</h3>
+        <p>Настраиваем поиск и рекламу. Каждый месяц показываем, сколько пришло людей и заявок.</p>
+        <p class="step__time">каждый месяц</p>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -272,7 +324,6 @@
     </header>
     <div class="posts">
 <!-- POSTS-HOME:START -->
-<article class="post" data-cat="seo"><a class="post__a" href="blog/seo-dlya-magizana.html"><img class="post__cover" src="img/seo-magazin.jpg" alt="" loading="lazy"><span class="tag tag--seo">Продвижение</span><h3>Заголовок статьи</h3><p class="post__meta">1 декабря 2026 · 1 мин</p></a></article>
 <article class="post" data-cat="dev"><a class="post__a" href="blog/core-web-vitals.html"><div class="ph ph--shot" role="img" aria-label="Место для обложки"><span>Обложка<small>16:10</small></span></div><span class="tag tag--dev">Разработка</span><h3>Скорость сайта и заявки: что такое Core Web Vitals</h3><p class="post__meta">11 ноября 2026 · 2 мин</p></a></article>
 <article class="post" data-cat="seo"><a class="post__a" href="blog/li-v-seo.html"><img class="post__cover" src="img/ii-seo-cover.svg" alt="" loading="lazy"><span class="tag tag--seo">Продвижение</span><h3>ИИ в SEO: что отдать нейросети, а что нельзя</h3><p class="post__meta">11 ноября 2026 · 4 мин</p></a></article>
 <!-- POSTS-HOME:END -->
@@ -293,11 +344,11 @@
     <div class="faq__list">
       <details class="qa">
         <summary>Сколько стоит сайт?</summary>
-        <div class="qa__a"><p>Зависит от задачи: визитка и лендинг стоят дешевле, интернет-магазин дороже. Ориентиры: визитка <span class="todo">от 150$</span>, каталог <span class="todo">от 300$</span>. Точную стоимость называем после короткого разговора, фиксируем её и не меняем по ходу работы.</p></div>
+        <div class="qa__a"><p>Зависит от задачи: визитка и лендинг стоят дешевле, интернет-магазин дороже. Ориентиры: визитка от 150$, каталог от 300$. Точную стоимость называем после короткого разговора, фиксируем её и не меняем по ходу работы.</p></div>
       </details>
       <details class="qa">
         <summary>Как быстро будет готов сайт?</summary>
-        <div class="qa__a"><p>Лендинг обычно <span class="todo">от 5 дней</span>, интернет-магазин <span class="todo">от 2 недель</span>. Срок зависит от того, как быстро вы присылаете все необходимые материалы. Мы заранее даём список, что нужно подготовить.</p></div>
+        <div class="qa__a"><p>Лендинг обычно от 5 дней, интернет-магазин от 2 недель. Срок зависит от того, как быстро вы присылаете все необходимые материалы. Мы заранее даём список, что нужно подготовить.</p></div>
       </details>
       <details class="qa">
         <summary>Что нужно от меня для начала работы?</summary>
@@ -305,7 +356,7 @@
       </details>
       <details class="qa">
         <summary>Когда после запуска начнут приходить клиенты?</summary>
-        <div class="qa__a"><p>Реклама даёт первые обращения в течение нескольких недель. Поисковое продвижение (SEO) работает дольше: заметный рост обычно через <span class="todo">2-3 месяца</span>, но он накапливается и держится дольше рекламы. Обещать конкретное число заявок честно нельзя, но мы показываем цифры в отчётах каждый месяц.</p></div>
+        <div class="qa__a"><p>Реклама даёт первые обращения в течение нескольких недель. Поисковое продвижение (SEO) работает дольше: заметный рост обычно через 2-3 месяца, но он накапливается и держится дольше рекламы. Обещать конкретное число заявок честно нельзя, но мы показываем цифры в отчётах каждый месяц.</p></div>
       </details>
       <details class="qa">
         <summary>Сможем ли мы сами менять тексты и товары на сайте?</summary>
@@ -328,17 +379,17 @@
       <p class="lead">Оставьте свои данные и мы свяжемся с вами в течение дня. Или звоните по указанным номерам.</p>
     </div>
     <ul class="contact__links">
-<li><a class="btn btn--light" href="#" id="open-modal-btn">Оставить заявку</a></li>
+<li><a class="btn btn--light" href="#contact" data-modal>Оставить заявку</a></li>
       <li>
   <div class="contact__a">
     <span>Телефоны для связи</span>
     
     <!-- Каждый номер оборачиваем в свою кликабельную ссылку -->
-    <a href="tel:+375291606175"><b class="todo">+375 29 160-61-75</b></a>
-    <a href="tel:+375291982805"><b class="todo">+375 29 198-28-05</b></a>
+    <a href="tel:+375291606175"><b>+375 29 160-61-75</b></a>
+    <a href="tel:+375291982805"><b>+375 29 198-28-05</b></a>
   </div>
 </li>
-      <li><a class="contact__a" href="mailto: oldtruecompany@gmail.com"><span>Почта</span><b class="todo">oldtruecompany@gmail.com</b></a></li>
+      <li><a class="contact__a" href="mailto:oldtruecompany@gmail.com"><span>Почта</span><b>oldtruecompany@gmail.com</b></a></li>
     </ul>
   </div>
 </section>
@@ -354,13 +405,12 @@
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"Сколько стоит сайт?","acceptedAnswer":{"@type":"Answer","text":"Зависит от задачи: визитка и лендинг стоят дешевле, интернет-магазин дороже. Точную стоимость называем после короткого разговора и фиксируем в договоре."}},
-{"@type":"Question","name":"Как быстро будет готов сайт?","acceptedAnswer":{"@type":"Answer","text":"Срок зависит от типа сайта и от того, как быстро вы присылаете тексты и фотографии. Мы заранее даём список, что нужно подготовить."}},
-{"@type":"Question","name":"Что нужно от меня для начала работы?","acceptedAnswer":{"@type":"Answer","text":"Рассказать о бизнесе и клиентах, прислать логотип и фотографии. Остальное берём на себя: домен, хостинг, настройку и запуск."}},
-{"@type":"Question","name":"Когда после запуска начнут приходить клиенты?","acceptedAnswer":{"@type":"Answer","text":"Реклама даёт первые обращения в течение нескольких недель, поисковое продвижение работает дольше, но результат накапливается. Мы показываем цифры в отчётах каждый месяц."}},
-{"@type":"Question","name":"Сможем ли мы сами менять тексты и товары на сайте?","acceptedAnswer":{"@type":"Answer","text":"Да. Мы делаем сайт, который вы редактируете сами, и показываем, как это делать."}},
-{"@type":"Question","name":"Что после запуска?","acceptedAnswer":{"@type":"Answer","text":"Первые 2 недели исправляем найденные недочёты бесплатно, дальше можно взять поддержку: обновления, правки, копии и отчёты."}},
-{"@type":"Question","name":"Как проходит оплата?","acceptedAnswer":{"@type":"Answer","text":"Работаем по договору: предоплата и остаток после сдачи сайта. Продвижение оплачивается помесячно."}}
+{"@type": "Question", "name": "Сколько стоит сайт?", "acceptedAnswer": {"@type": "Answer", "text": "Зависит от задачи: визитка и лендинг стоят дешевле, интернет-магазин дороже. Ориентиры: визитка от 150$, каталог от 300$. Точную стоимость называем после короткого разговора, фиксируем её и не меняем по ходу работы."}},
+{"@type": "Question", "name": "Как быстро будет готов сайт?", "acceptedAnswer": {"@type": "Answer", "text": "Лендинг обычно от 5 дней, интернет-магазин от 2 недель. Срок зависит от того, как быстро вы присылаете все необходимые материалы. Мы заранее даём список, что нужно подготовить."}},
+{"@type": "Question", "name": "Что нужно от меня для начала работы?", "acceptedAnswer": {"@type": "Answer", "text": "Рассказать о бизнесе и клиентах, прислать логотип и фотографии, если они есть, если нет, то мы можем создать их. Тексты мы пишем сами. Остальное берём на себя: домен, хостинг, настройку и запуск."}},
+{"@type": "Question", "name": "Когда после запуска начнут приходить клиенты?", "acceptedAnswer": {"@type": "Answer", "text": "Реклама даёт первые обращения в течение нескольких недель. Поисковое продвижение (SEO) работает дольше: заметный рост обычно через 2-3 месяца, но он накапливается и держится дольше рекламы. Обещать конкретное число заявок честно нельзя, но мы показываем цифры в отчётах каждый месяц."}},
+{"@type": "Question", "name": "Сможем ли мы сами менять тексты и товары на сайте?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Делаем так, чтобы вы редактировали сайт сами: меняли цены, тексты, добавляли товары и статьи. Покажем, как это делается, и дадим короткую инструкцию."}},
+{"@type": "Question", "name": "Что будет после запуска?", "acceptedAnswer": {"@type": "Answer", "text": "Первые 2 недели после запуска исправляем все найденные недочёты бесплатно. Дальше можно взять поддержку: обновления, правки, резервные копии и отчёты."}}
 ]}
 </script>
 <script src="main.js" defer></script>
@@ -368,21 +418,25 @@
 
 <!-- Всплывающее окно (Модалка) -->
 <div class="modal-overlay" id="contact-modal" aria-hidden="true">
-  <div class="modal-content">
+  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <button class="modal-close" id="close-modal-btn" aria-label="Закрыть окно">×</button>
-    <h3 class="modal-title">Оставить заявку</h3>
+    <h3 class="modal-title" id="modal-title">Оставить заявку</h3>
     <p class="modal-subtitle">Оставьте контакты, и мы перезвоним вам в течение дня.</p>
     
-    <form class="modal-form" id="contact-form">
+    <form class="modal-form" id="contact-form" novalidate>
       <div class="form-group">
         <label for="userName">Ваше имя</label>
-        <input type="text" id="userName" name="userName" placeholder="Иван" required>
+        <input type="text" id="userName" name="name" placeholder="Иван" autocomplete="name" maxlength="80" required>
       </div>
       <div class="form-group">
         <label for="userPhone">Номер телефона</label>
-        <input type="tel" id="userPhone" name="userPhone" placeholder="+375 (29) 000-00-00" required>
+        <input type="tel" id="userPhone" name="phone" placeholder="+375 (29) 000-00-00" autocomplete="tel" inputmode="tel" maxlength="24" required>
       </div>
+      <!-- Ловушка для спам-ботов: людям поле не видно -->
+      <div class="hp" aria-hidden="true"><label for="userSite">Сайт</label><input type="text" id="userSite" name="website" tabindex="-1" autocomplete="off"></div>
+      <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
       <button type="submit" class="btn modal-submit">Отправить заявку</button>
+      <p class="form-note">Нажимая кнопку, вы соглашаетесь, что мы свяжемся с вами по этому номеру.</p>
     </form>
   </div>
 </div>
