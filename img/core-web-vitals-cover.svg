@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Спидометр скорости сайта и три показателя Core Web Vitals">
+  <rect width="800" height="500" fill="#F5F6FA"/>
+  <path d="M110,66 Q110,96 140,96 Q110,96 110,126 Q110,96 80,96 Q110,96 110,66Z" fill="#FFB020"/>
+  <path d="M700,380 Q700,402 722,402 Q700,402 700,424 Q700,402 678,402 Q700,402 700,380Z" fill="#AEBBFF"/>
+  <path d="M672,70 Q672,84 686,84 Q672,84 672,98 Q672,84 658,84 Q672,84 672,70Z" fill="#2D4BFF"/>
+  <!-- спидометр -->
+  <rect x="90" y="120" width="380" height="290" rx="28" fill="#FFFFFF" stroke="#0E1220" stroke-width="4"/>
+  <path d="M150,340 A130,130 0 0 1 280,210" fill="none" stroke="#2F9E6B" stroke-width="26"/>
+  <path d="M280,210 A130,130 0 0 1 372,248" fill="none" stroke="#FFB020" stroke-width="26"/>
+  <path d="M372,248 A130,130 0 0 1 410,340" fill="none" stroke="#E5484D" stroke-width="26"/>
+  <path d="M280,340 L208,262" stroke="#0E1220" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="280" cy="340" r="16" fill="#0E1220"/>
+  <rect x="215" y="370" width="130" height="14" rx="7" fill="#C9CFDD"/>
+  <!-- три показателя -->
+  <rect x="510" y="140" width="200" height="70" rx="18" fill="#2D4BFF"/>
+  <rect x="532" y="160" width="60" height="14" rx="7" fill="#FFFFFF"/>
+  <rect x="532" y="184" width="120" height="10" rx="5" fill="#AEBBFF"/>
+  <circle cx="682" cy="175" r="12" fill="#2F9E6B"/>
+  <rect x="510" y="230" width="200" height="70" rx="18" fill="#FFFFFF" stroke="#C9CFDD" stroke-width="2"/>
+  <rect x="532" y="250" width="60" height="14" rx="7" fill="#0E1220"/>
+  <rect x="532" y="274" width="120" height="10" rx="5" fill="#C9CFDD"/>
+  <circle cx="682" cy="265" r="12" fill="#2F9E6B"/>
+  <rect x="510" y="320" width="200" height="70" rx="18" fill="#FFFFFF" stroke="#C9CFDD" stroke-width="2"/>
+  <rect x="532" y="340" width="60" height="14" rx="7" fill="#0E1220"/>
+  <rect x="532" y="364" width="120" height="10" rx="5" fill="#C9CFDD"/>
+  <circle cx="682" cy="355" r="12" fill="#FFB020"/>
+</svg>
