@@ -728,3 +728,55 @@ div.post__a{cursor:default}
   .slider-btn{top:auto;bottom:0;transform:none}
   .prev-btn{left:0}.next-btn{left:52px;right:auto}
 }
+
+/* ===== Услуги: раскрытие карточки «Подробнее» ===== */
+.cards{position:relative;transition:height .5s var(--ease)}
+.card__foot{display:flex;flex-wrap:wrap-reverse;align-items:flex-end;justify-content:space-between;gap:0 16px;margin-top:auto}
+.card__foot .card__price{margin-left:auto}
+.card__more{display:none}
+.js .card__more{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 4px 0 0;border:0;background:none;color:var(--accent);font:700 16px/1 var(--font);cursor:pointer;flex-shrink:0}
+.card__more::after{content:"";width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .25s var(--ease)}
+.card__more:hover::after{transform:translateX(4px) rotate(-45deg)}
+.card__more:hover{color:var(--accent-dark)}
+.card.is-open .card__more{display:none}
+
+.card__details{display:none;opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s var(--ease)}
+.card.is-open .card__details{display:block}
+.card.is-shown .card__details{opacity:1;transform:none}
+.card__cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 40px;margin-top:28px;padding-top:28px;border-top:1px solid var(--line)}
+.card__col h4{margin:0 0 14px;font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.card__list li{position:relative;padding:9px 0 9px 30px;border-bottom:1px dashed var(--line);color:var(--muted);line-height:1.45}
+.card__list li:last-child{border-bottom:0}
+.card__list li::before{content:"";position:absolute;left:2px;top:13px;width:16px;height:16px;border-radius:50%;background:var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-4.8' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat}
+.card__list--add li{display:flex;justify-content:space-between;gap:16px}
+.card__list--add li::before{background:var(--bg-alt) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 4.5v7M4.5 8h7' fill='none' stroke='%230E1220' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/100% no-repeat}
+.card__list--add b{flex-shrink:0;color:var(--ink);font-weight:800;white-space:nowrap}
+.card__cta{margin-top:24px}
+
+.card__close{position:absolute;top:16px;right:16px;z-index:2;display:none;place-items:center;width:44px;height:44px;padding:0;border:1px solid var(--line);border-radius:50%;background:var(--card);color:var(--ink);font:400 28px/1 var(--font);cursor:pointer;opacity:0;transform:scale(.6) rotate(-90deg);transition:opacity .3s,transform .35s var(--ease),background .2s,color .2s}
+.card.is-open .card__close{display:grid}
+.card.is-shown .card__close{opacity:1;transform:none}
+.card__close:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* Состояния сетки во время анимации и в раскрытом виде */
+.card.is-floating{position:absolute;z-index:3;margin:0;transition:left .5s var(--ease),top .5s var(--ease),width .5s var(--ease),height .5s var(--ease),box-shadow .5s;overflow:hidden;box-shadow:0 24px 60px rgba(21,23,28,.16)}
+.cards.is-busy .card:not(.is-open){opacity:0;transform:scale(.94);pointer-events:none;transition:opacity .3s ease,transform .4s var(--ease)}
+.cards.is-expanded .card:not(.is-open){display:none}
+.cards.is-expanded .card.is-open{grid-column:1/-1}
+.card.is-open{transform:none!important;box-shadow:0 24px 60px rgba(21,23,28,.12)}
+.card.is-open::after{opacity:0!important}
+.card.is-open>*{translate:none!important}
+.card.is-open h3{font-size:clamp(26px,3vw,34px);padding-right:52px}
+.card.is-open .tag{margin-right:56px}
+.card__ph{visibility:hidden}
+
+@media (max-width:640px){
+  .card__cols{grid-template-columns:minmax(0,1fr);gap:24px;margin-top:22px;padding-top:22px}
+  .card__close{top:12px;right:12px}
+  .card__cta{width:100%}
+  .card__foot{flex-direction:column-reverse;flex-wrap:nowrap;align-items:flex-start}
+  .card__foot .card__price{align-self:flex-end}
+}
+@media (prefers-reduced-motion:reduce){
+  .card.is-floating,.cards{transition:none!important}
+}
