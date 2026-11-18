@@ -82,6 +82,7 @@ section[id]{scroll-margin-top:76px}
 }
 .nav{display:flex;align-items:center;gap:6px}
 .nav a{padding:10px 12px;font:12px/1 var(--font);font-weight:600;text-decoration:none;color:var(--muted);border-radius:8px}
+.nav .nav__cta{white-space:nowrap}
 .nav a:hover{color:var(--ink)}
 .nav .nav__cta{margin-left:10px;color:#fff;padding:0 20px}
 .nav .nav__cta:hover{color:#fff}
