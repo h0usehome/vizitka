@@ -87,6 +87,7 @@
         if (e.target === c && e.propertyName === 'transform' && c.classList.contains('is-in')) { c.classList.remove('reveal', 'is-in'); }
       });
       c.addEventListener('pointermove', function (e) {
+        if (c.classList.contains('is-open')) { return; }
         var r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
         c.style.transform = 'perspective(' + k.p + 'px) rotateX(' + (-y * k.a).toFixed(2) + 'deg) rotateY(' + (x * k.b).toFixed(2) + 'deg) translateY(' + k.l + 'px)';
         c.style.setProperty('--gx', ((x + 0.5) * 100).toFixed(0) + '%');
@@ -131,6 +132,106 @@
         currentIndex = slides.length - 1;
       }
       updateSlider();
+    });
+  }
+
+/* ===== Услуги: карточка «Подробнее» раскрывается на всю сетку ===== */
+  var grid = doc.querySelector('#services .cards');
+  if (grid) {
+    var DUR = reduce ? 0 : 500, FADE = reduce ? 0 : 220;
+    var openCard = null, busy = false;
+
+    function box(el) { return { l: el.offsetLeft, t: el.offsetTop, w: el.offsetWidth, h: el.offsetHeight }; }
+    function place(el, b) { el.style.left = b.l + 'px'; el.style.top = b.t + 'px'; el.style.width = b.w + 'px'; el.style.height = b.h + 'px'; }
+    function unplace(el) { el.style.left = el.style.top = el.style.width = el.style.height = ''; }
+    function placeholder(card, h) { var ph = doc.createElement('div'); ph.className = 'card__ph'; ph.style.minHeight = h + 'px'; card.parentNode.insertBefore(ph, card); return ph; }
+    function headerGap() { return (header ? header.offsetHeight : 0) + 16; }
+
+    function expand(card) {
+      if (busy || openCard) { return; }
+      busy = true; openCard = card;
+      card.style.transform = '';
+      var from = box(card), gh = grid.offsetHeight;
+      var ph = placeholder(card, from.h);
+      grid.style.height = gh + 'px';
+      grid.classList.add('is-busy');
+      card.classList.add('is-floating', 'is-open');
+      // меряем итоговую высоту: карточка на всю ширину сетки
+      card.style.left = '0px'; card.style.top = '0px'; card.style.width = grid.clientWidth + 'px'; card.style.height = 'auto';
+      var toH = card.offsetHeight;
+      place(card, from);
+      void card.offsetWidth; // фиксируем стартовое положение перед анимацией
+      place(card, { l: 0, t: 0, w: grid.clientWidth, h: toH });
+      grid.style.height = toH + 'px';
+
+      var gt = grid.getBoundingClientRect().top;
+      if (gt < headerGap() || gt > window.innerHeight * 0.5) {
+        window.scrollTo({ top: window.scrollY + gt - headerGap(), behavior: reduce ? 'auto' : 'smooth' });
+      }
+
+      setTimeout(function () { card.classList.add('is-shown'); }, DUR * 0.45); // содержимое проявляется во время раскрытия
+      setTimeout(function () {
+        ph.remove();
+        grid.classList.add('is-expanded');
+        card.classList.remove('is-floating');
+        unplace(card); grid.style.height = '';
+        card.querySelector('.card__more').setAttribute('aria-expanded', 'true');
+        card.querySelector('.card__close').focus({ preventScroll: true });
+        busy = false;
+      }, DUR);
+    }
+
+    function collapse() {
+      if (busy || !openCard) { return; }
+      busy = true;
+      var card = openCard;
+      card.classList.remove('is-shown');
+      setTimeout(function () {
+        var from = box(card);
+        // меряем, где карточка окажется в обычной сетке (остальные возвращаются, пока прозрачные)
+        grid.classList.remove('is-expanded');
+        card.classList.remove('is-open');
+        var to = box(card), toGH = grid.offsetHeight;
+        var ph = placeholder(card, to.h);
+        card.classList.add('is-floating');
+        place(card, from);
+        grid.style.height = from.h + 'px';
+        void card.offsetWidth;
+        place(card, to);
+        grid.style.height = toGH + 'px';
+        grid.classList.remove('is-busy');
+
+        setTimeout(function () {
+          ph.remove();
+          card.classList.remove('is-floating');
+          unplace(card); grid.style.height = '';
+          var more = card.querySelector('.card__more');
+          more.setAttribute('aria-expanded', 'false');
+          more.focus({ preventScroll: true });
+          var r = card.getBoundingClientRect();
+          if (r.top < headerGap() || r.bottom > window.innerHeight) {
+            window.scrollTo({ top: window.scrollY + r.top - headerGap(), behavior: reduce ? 'auto' : 'smooth' });
+          }
+          openCard = null; busy = false;
+        }, DUR);
+      }, FADE);
+    }
+
+    grid.querySelectorAll('.card').forEach(function (card) {
+      var more = card.querySelector('.card__more'), close = card.querySelector('.card__close');
+      if (more) { more.addEventListener('click', function () { expand(card); }); }
+      if (close) { close.addEventListener('click', collapse); }
+    });
+    // клик вне раскрытой карточки (кроме окна заявки) сворачивает её
+    doc.addEventListener('click', function (e) {
+      if (!openCard || openCard.contains(e.target) || e.target.closest('.modal-overlay')) { return; }
+      collapse();
+    });
+    doc.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape' || !openCard) { return; }
+      var md = doc.getElementById('contact-modal');
+      if ((md && md.classList.contains('is-open')) || doc.body.classList.contains('nav-open')) { return; }
+      collapse();
     });
   }
 
